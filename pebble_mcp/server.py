@@ -15,6 +15,8 @@ from pebble_mcp import (
     tools_devloop,
     tools_flow,
     tools_fonts,
+    tools_project,
+    tools_review,
     tools_store,
 )
 from pebble_mcp.capabilities import get_capabilities
@@ -38,6 +40,8 @@ tools_design.register(mcp)   # tier 2: image_quantize/prep, color_nearest, palet
 tools_fonts.register(mcp)    # tier 2: font_plan, pdc_convert
 tools_flow.register(mcp)     # tier 3: flow_run/validate, emu screenshot/input/logs
 tools_devloop.register(mcp)  # tier 3: pebble_build/install, emu start/stop
+tools_project.register(mcp)  # phase 4: project_new/info/add_resource/set_meta
+tools_review.register(mcp)   # phase 4: design_review, project_smoke_test
 resources.register(mcp)      # pebble:// colors, fonts, platforms, wire-conventions
 
 
