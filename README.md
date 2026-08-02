@@ -1,7 +1,7 @@
 # pebble-mcp
 
 <p align="center">
-  <img src="docs/demo.gif" alt="pebble-mcp downloading a store app and screenshotting it in the emulator" width="200">
+  <img src="https://raw.githubusercontent.com/dbonomo/pebble-mcp/master/docs/demo.gif" alt="pebble-mcp downloading a store app and screenshotting it in the emulator" width="200">
 </p>
 
 An [MCP](https://modelcontextprotocol.io) server for the Pebble smartwatch
