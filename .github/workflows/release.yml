@@ -1,0 +1,41 @@
+name: Release
+
+# Publishes to PyPI via Trusted Publishing (OIDC) — no API token stored.
+# Fires when a version tag is pushed:  git tag v0.1.1 && git push origin v0.1.1
+# Requires a PyPI "pending publisher" configured once (see README / LAUNCH.md):
+#   project pebble-mcp, owner dbonomo, repo pebble-mcp,
+#   workflow release.yml, environment pypi.
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write   # OIDC token for Trusted Publishing
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.13"
+
+      - name: Guard — tag must match pyproject version
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG=$(uv run python -c "import tomllib,pathlib; print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")
+          echo "tag=$TAG pyproject=$PKG"
+          test "$TAG" = "$PKG" || { echo "::error::tag v$TAG != pyproject version $PKG"; exit 1; }
+
+      - name: Test before publishing
+        run: uv run pytest -q
+
+      - name: Build
+        run: uv build
+
+      - name: Publish to PyPI (Trusted Publishing)
+        uses: pypa/gh-action-pypi-publish@release/v1
