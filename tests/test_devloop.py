@@ -25,6 +25,20 @@ from pebble_mcp.devloop import (
     parse_build_output,
 )
 
+
+@pytest.fixture(autouse=True)
+def _pebble_on_path(monkeypatch):
+    """Make the tier-3 gate pass by default.
+
+    These tests drive a stub runner, not the real CLI, so pretend `pebble` is
+    installed — otherwise they only pass on machines that happen to have it
+    (and fail in clean CI). The PATH-gating tests below request the ``no_pebble``
+    fixture, which runs after this one and overrides it back to absent.
+    """
+    monkeypatch.setattr(
+        devloop.shutil, "which", lambda name: "/usr/bin/pebble" if name == "pebble" else None
+    )
+
 # --------------------------------------------------------------------------- #
 # Realistic waf output fixtures (trimmed from real `pebble build` runs)
 # --------------------------------------------------------------------------- #
