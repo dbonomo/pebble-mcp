@@ -1,0 +1,512 @@
+{
+  "data": [
+    {
+      "author": "Logan Head",
+      "capabilities": [
+        "health",
+        "configurable",
+        "location"
+      ],
+      "category": "Faces",
+      "category_color": "ffffff",
+      "category_id": "528d3ef2dc7b5f580700000a",
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "published_date": "2026-06-27T21:45:55.088",
+          "release_notes": "+ Initial Release"
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 201,
+          "name": "chalk",
+          "description": "A rugged watchface inspired by the Garmin Instinct. It features a black & white theme with a historical information graph and a versatile miniature window.\r\n\r\nThe current time is prominently displayed on the watch face, and bisects four complication slots that can each be customized to display various combinations of the following data: \r\n- Weather (conditions & temperature) via Open-Meteo\r\n- Air pressure\r\n- Pressure trend\r\n- Elevation\r\n- Battery\r\n- Date\r\n- Custom time zone\r\n- Steps\r\n- Calories\r\n- Heart rate\r\n- Sunrise/sunset time\r\n- Sun position\r\n- Moon phase\r\n- Watch status",
+          "images": {
+            "icon": "",
+            "list": "",
+            "screenshot": "https://assets.repebble.com/screenshots/65dfd96c8a8c47cd8fda4985/chalk/1417e663-cd44-4e8f-bb2a-522ddbbe73e5.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 137,
+          "name": "basalt",
+          "description": "A rugged watchface inspired by the Garmin Instinct. It features a black & white theme with a historical information graph and a versatile miniature window.\r\n\r\nThe current time is prominently displayed on the watch face, and bisects four complication slots that can each be customized to display various combinations of the following data: \r\n- Weather (conditions & temperature) via Open-Meteo\r\n- Air pressure\r\n- Pressure trend\r\n- Elevation\r\n- Battery\r\n- Date\r\n- Custom time zone\r\n- Steps\r\n- Calories\r\n- Heart rate\r\n- Sunrise/sunset time\r\n- Sun position\r\n- Moon phase\r\n- Watch status",
+          "images": {
+            "icon": "",
+            "list": "",
+            "screenshot": "https://assets.repebble.com/screenshots/65dfd96c8a8c47cd8fda4985/basalt/5c0b1821-50c6-45a3-af5a-75d99443a62b.png"
+          }
+        },
+        {
+          "sdk_version": "5.101",
+          "pebble_process_info_flags": 329,
+          "name": "emery",
+          "description": "A rugged watchface inspired by the Garmin Instinct. It features a black & white theme with a historical information graph and a versatile miniature window.\r\n\r\nThe current time is prominently displayed on the watch face, and bisects four complication slots that can each be customized to display various combinations of the following data: \r\n- Weather (conditions & temperature) via Open-Meteo\r\n- Air pressure\r\n- Pressure trend\r\n- Elevation\r\n- Battery\r\n- Date\r\n- Custom time zone\r\n- Steps\r\n- Calories\r\n- Heart rate\r\n- Sunrise/sunset time\r\n- Sun position\r\n- Moon phase\r\n- Watch status",
+          "images": {
+            "icon": "",
+            "list": "",
+            "screenshot": "https://assets.repebble.com/screenshots/65dfd96c8a8c47cd8fda4985/emery/653b51a1-f0a6-43b9-8ac1-21a823cf0541.png"
+          }
+        }
+      ],
+      "created_at": "2026-06-27T21:45:55.043",
+      "description": "A rugged watchface inspired by the Garmin Instinct. It features a black & white theme with a historical information graph and a versatile miniature window.\r\n\r\nThe current time is prominently displayed on the watch face, and bisects four complication slots that can each be customized to display vario... [truncated for fixture]",
+      "developer_id": "5c26a4f727cdec0001c0500d",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [
+        {
+          "720x320": "https://assets.repebble.com/banners/65dfd96c8a8c47cd8fda4985/emery/a8df78e6-e3db-49e9-b46c-2c0f707d33cc.png",
+          "orig": "https://assets.repebble.com/banners/65dfd96c8a8c47cd8fda4985/emery/a8df78e6-e3db-49e9-b46c-2c0f707d33cc.png"
+        }
+      ],
+      "hearts": 16,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "65dfd96c8a8c47cd8fda4985",
+      "latest_release": {
+        "id": "62bb29d8041a44d6a0d8dc5d",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/65dfd96c8a8c47cd8fda4985/1.0.0/7e767602-912e-4248-b65c-1f2426ed3671.pbw",
+        "published_date": "2026-06-27T21:45:55.088",
+        "release_notes": "+ Initial Release",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "1.0.0"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/65dfd96c8a8c47cd8fda4985/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/65dfd96c8a8c47cd8fda4985/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/65dfd96c8a8c47cd8fda4985/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/65dfd96c8a8c47cd8fda4985/heart",
+        "share": "https://apps.rebble.io/application/65dfd96c8a8c47cd8fda4985"
+      },
+      "list_image": {
+        "144x144": "",
+        "80x80": ""
+      },
+      "published_date": null,
+      "screenshot_hardware": "emery",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/65dfd96c8a8c47cd8fda4985/emery/653b51a1-f0a6-43b9-8ac1-21a823cf0541.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/screenshots/65dfd96c8a8c47cd8fda4985/emery/d16a4ab2-4ce8-40ae-ab34-b346fbd3571a.png"
+        }
+      ],
+      "source": "https://github.com/erlog135/tumble",
+      "title": "Tumble",
+      "type": "watchface",
+      "uuid": "f3998a09-ed55-47aa-98bd-f42a8f745f4e",
+      "visible": true,
+      "website": "https://loganhead.net",
+      "icon_resource_id": 1
+    },
+    {
+      "author": "Logan Head",
+      "capabilities": [],
+      "category": "Remotes",
+      "category_color": "fc4b4b",
+      "category_id": "5261a8fb3b773043d5000008",
+      "changelog": [
+        {
+          "version": "1.0",
+          "published_date": "2026-04-15T03:47:55.712",
+          "release_notes": "+ Initial release"
+        }
+      ],
+      "companions": {
+        "android": {
+          "id": 906,
+          "name": "Treble",
+          "icon": "/api/assets/companions/a71b955ceef1469fbae23373/android/6c37b463-3696-488d-9905-b5344e4a8f6e.png",
+          "url": "https://github.com/erlog135/treble/releases",
+          "pebblekit_version": "3",
+          "required": true
+        },
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 64,
+          "name": "aplite",
+          "description": "A song-finding app using Shazam\u2019s audio recognition. It connects to an Android companion app to listen to nearby sound through your phone\u2019s microphone, securely process it through Shazam\u2019s service, and match it with any known audio fingerprint in Apple\u2019s music catalog. \r\n\r\nYou can install the Android app from the source link at the bottom of the page. After setting it up on your phone, launch the watch app at any point to listen for music. When a song is successfully found, you will feel a short vibration and be presented with the song name and artist. The previous 10 found songs are saved right on your watch, organized by discovery date.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/a71b955ceef1469fbae23373/small/32ca6d36-990b-4858-8674-dbacd013d84a.png",
+            "list": "https://assets.repebble.com/icons/a71b955ceef1469fbae23373/large/1f71d6f2-f237-45c2-8952-081d2e591054.png",
+            "screenshot": "https://assets.repebble.com/screenshots/a71b955ceef1469fbae23373/aplite/09fffbdc-7d8a-4266-9eb0-ea86509b8caf.gif"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 128,
+          "name": "basalt",
+          "description": "A song-finding app using Shazam\u2019s audio recognition. It connects to an Android companion app to listen to nearby sound through your phone\u2019s microphone, securely process it through Shazam\u2019s service, and match it with any known audio fingerprint in Apple\u2019s music catalog. \r\n\r\nYou can install the Android app from the source link at the bottom of the page. After setting it up on your phone, launch the watch app at any point to listen for music. When a song is successfully found, you will feel a short vibration and be presented with the song name and artist. The previous 10 found songs are saved right on your watch, organized by discovery date.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/a71b955ceef1469fbae23373/small/32ca6d36-990b-4858-8674-dbacd013d84a.png",
+            "list": "https://assets.repebble.com/icons/a71b955ceef1469fbae23373/large/1f71d6f2-f237-45c2-8952-081d2e591054.png",
+            "screenshot": "https://assets.repebble.com/screenshots/a71b955ceef1469fbae23373/basalt/cf1bd6fa-d986-4473-b8bb-e639df2670e2.gif"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 192,
+          "name": "chalk",
+          "description": "A song-finding app using Shazam\u2019s audio recognition. It connects to an Android companion app to listen to nearby sound through your phone\u2019s microphone, securely process it through Shazam\u2019s service, and match it with any known audio fingerprint in Apple\u2019s music catalog. \r\n\r\nYou can install the Android app from the source link at the bottom of the page. After setting it up on your phone, launch the watch app at any point to listen for music. When a song is successfully found, you will feel a short vibration and be presented with the song name and artist. The previous 10 found songs are saved right on your watch, organized by discovery date.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/a71b955ceef1469fbae23373/small/32ca6d36-990b-4858-8674-dbacd013d84a.png",
+            "list": "https://assets.repebble.com/icons/a71b955ceef1469fbae23373/large/1f71d6f2-f237-45c2-8952-081d2e591054.png",
+            "screenshot": "https://assets.repebble.com/screenshots/a71b955ceef1469fbae23373/chalk/18d85361-1ced-41ee-bf18-565035b8f481.gif"
+          }
+        }
+      ],
+      "created_at": "2026-04-15T03:47:55.155",
+      "description": "A song-finding app using Shazam\u2019s audio recognition. It connects to an Android companion app to listen to nearby sound through your phone\u2019s microphone, securely process it through Shazam\u2019s service, and match it with any known audio signature in Apple\u2019s music catalog. \r\n\r\nYou can install the Android ... [truncated for fixture]",
+      "developer_id": "5c26a4f727cdec0001c0500d",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [
+        {
+          "720x320": "https://assets.repebble.com/banners/a71b955ceef1469fbae23373/emery/f5df215e-0138-431e-bc2d-5a1aad713637.png",
+          "orig": "https://assets.repebble.com/banners/a71b955ceef1469fbae23373/emery/f5df215e-0138-431e-bc2d-5a1aad713637.png"
+        }
+      ],
+      "hearts": 273,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "a71b955ceef1469fbae23373",
+      "latest_release": {
+        "id": "4592b5ed984b4fff8c2b69d9",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/a71b955ceef1469fbae23373/1.0/1519a353-2f49-4451-8069-ed8c41d53539.pbw",
+        "published_date": "2026-04-15T03:47:55.712",
+        "release_notes": "+ Initial release",
+        "settings_page_state": "no_page",
+        "companion_android_state": "companion_loads",
+        "companion_ios_state": "no_companion",
+        "version": "1.0"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/a71b955ceef1469fbae23373/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/a71b955ceef1469fbae23373/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/a71b955ceef1469fbae23373/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/a71b955ceef1469fbae23373/heart",
+        "share": "https://apps.rebble.io/application/a71b955ceef1469fbae23373"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/icons/a71b955ceef1469fbae23373/large/1f71d6f2-f237-45c2-8952-081d2e591054.png",
+        "80x80": "https://assets.repebble.com/icons/a71b955ceef1469fbae23373/small/32ca6d36-990b-4858-8674-dbacd013d84a.png"
+      },
+      "published_date": null,
+      "screenshot_hardware": "emery",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/a71b955ceef1469fbae23373/emery/38b8b5d3-5edb-46bc-beb5-c7037b6410f7.gif"
+        },
+        {
+          "144x168": "https://assets.repebble.com/screenshots/a71b955ceef1469fbae23373/emery/1ba36489-6d32-4f0b-9f6d-c20c3d9059b8.png"
+        }
+      ],
+      "source": "https://github.com/erlog135/treble",
+      "title": "Treble",
+      "type": "watchapp",
+      "uuid": "c49abd69-dd2c-4655-a7ce-ec7da67aa930",
+      "visible": true,
+      "website": "https://github.com/erlog135/treble",
+      "icon_resource_id": 1
+    },
+    {
+      "author": "Logan Head",
+      "capabilities": [
+        "configurable",
+        "location"
+      ],
+      "category": "Tools & Utilities",
+      "category_color": "fdbf37",
+      "category_id": "5261a8fb3b773043d500000f",
+      "changelog": [
+        {
+          "version": "1.0",
+          "published_date": "2026-02-14T01:03:26",
+          "release_notes": "+ Initial release"
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 264,
+          "name": "diorite",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/diorite/screenshot-0.png"
+          }
+        },
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 72,
+          "name": "aplite",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/aplite/screenshot-0.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 200,
+          "name": "chalk",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/chalk/screenshot-0.png"
+          }
+        }
+      ],
+      "created_at": "2026-02-14T01:03:25",
+      "description": "An astronomy app for Pebble. It uses the time and your location to obtain the azimuth & altitude of the sun, moon, planets, and various constellations. Eligible bodies will also display their phase, rise & set times, and relative illumination levels. No internet access required.\r\n\r\nLocate these obje... [truncated for fixture]",
+      "developer_id": "5c26a4f727cdec0001c0500d",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [
+        {
+          "720x320": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/headers/emery/header-0.png",
+          "orig": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/headers/emery/header-0.png"
+        }
+      ],
+      "hearts": 78,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "698fc9d8086643000aef17a3",
+      "latest_release": {
+        "id": "698fc9de086643000aef17c4",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/apps/698fc9d8086643000aef17a3/releases/1.0.pbw",
+        "published_date": "2026-02-14T01:03:26",
+        "release_notes": "+ Initial release",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "1.0"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/698fc9d8086643000aef17a3/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/698fc9d8086643000aef17a3/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/698fc9d8086643000aef17a3/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/698fc9d8086643000aef17a3/heart",
+        "share": "https://apps.rebble.io/application/698fc9d8086643000aef17a3"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+        "80x80": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png"
+      },
+      "published_date": "2026-04-02T19:39:57.712",
+      "screenshot_hardware": "emery",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/emery/screenshot-0.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/emery/screenshot-1.png"
+        }
+      ],
+      "source": "https://github.com/erlog135/hubble",
+      "title": "Hubble",
+      "type": "watchapp",
+      "uuid": "4fca3013-c56a-4870-8629-81b379f917e0",
+      "visible": true,
+      "website": "https://loganhead.net",
+      "icon_resource_id": 1
+    }
+  ],
+  "limit": 3,
+  "offset": 0,
+  "links": {
+    "nextPage": "https://appstore-api.repebble.com/api/v1/apps/dev/5c26a4f727cdec0001c0500d?hardware=emery&limit=3&offset=3"
+  }
+}

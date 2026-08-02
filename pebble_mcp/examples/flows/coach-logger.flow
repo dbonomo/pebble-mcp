@@ -1,0 +1,27 @@
+# coach-logger flow
+# SAFETY RULES (live-write hazards — DO NOT TRIGGER):
+#   - NEVER `press select` while inside the Weigh-in number picker: it confirms a
+#     LIVE weigh-in POST to the server. Enter the picker with select from the menu,
+#     shoot it, then ALWAYS exit with `press back`.
+#   - NEVER `press select` on a favorite row: it fires a LIVE meal POST.
+#   Navigating the menu with up/down and shooting is safe.
+app coach-logger
+wait 8
+shot menu-weigh-in          # menu top: Weigh-in row
+press select                # enter Weigh-in number picker (no POST yet)
+wait 2
+shot weigh-in-picker
+press back                  # EXIT picker WITHOUT confirming (no live write)
+wait 1
+press down
+wait 1
+shot favorite-1
+press down
+wait 1
+shot favorite-2
+press down
+wait 1
+shot favorite-3
+press down
+wait 1
+shot voice-log             # last row: Voice log

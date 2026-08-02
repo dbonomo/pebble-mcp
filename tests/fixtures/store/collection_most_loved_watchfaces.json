@@ -1,0 +1,505 @@
+{
+  "data": [
+    {
+      "author": "David Rodr\u00edguez Rinc\u00f3n",
+      "capabilities": [
+        "location",
+        "configurable"
+      ],
+      "category": "Faces",
+      "category_color": "ffffff",
+      "category_id": "528d3ef2dc7b5f580700000a",
+      "changelog": [
+        {
+          "version": "3.7",
+          "published_date": "2016-10-04T18:15:09.613",
+          "release_notes": "- Fix Yahoo Weather geolocation"
+        },
+        {
+          "version": "3.6",
+          "published_date": "2016-04-01T09:57:58.202",
+          "release_notes": "- Fix Yahoo! Weather temperature when displaying Feels Like on Celsius\r\n- Add OpenWeatherMap as weather provider\r\n- Add validations to the settings page to avoid submissions when weather provider is changed without entering a valid API key\r\n- minor UI changes for Pebble Time Round"
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.83",
+          "pebble_process_info_flags": 9,
+          "name": "basalt",
+          "description": "The most loved watchface for Pebble is now color!\r\n\r\nDisplay the current weather conditions and the forecast for the day by shaking your wrist twice. Optionally you can get the 3 day forecast by backing the project.\r\n\r\nYWeather tells you the time in 21 languages: english, spanish, italian, catalan, chinese, czech, danish, dutch, finnish, french, german, hungarian, japanese, norwegian, polish, portuguese, romanian, russian, slovak, swedish and turkish.\r\n\r\nGet the info than you want, displayed in the right way.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/52cc44e045ffdd31dd000180.png",
+            "list": "https://assets.repebble.com/icons/52cc44e045ffdd31dd000180.png",
+            "screenshot": "https://assets.repebble.com/screenshots/52cc44e045ffdd31dd000180-1.png"
+          }
+        },
+        {
+          "sdk_version": "5.83",
+          "pebble_process_info_flags": 9,
+          "name": "chalk",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/52cc44e045ffdd31dd000180.png",
+            "list": "https://assets.repebble.com/icons/52cc44e045ffdd31dd000180.png",
+            "screenshot": ""
+          }
+        },
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 9,
+          "name": "aplite",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/52cc44e045ffdd31dd000180.png",
+            "list": "https://assets.repebble.com/icons/52cc44e045ffdd31dd000180.png",
+            "screenshot": "https://assets.repebble.com/screenshots/52cc44e045ffdd31dd000180/aplite/f6013751-794e-4733-874f-b01c3dc0c552_generated_260305.gif"
+          }
+        }
+      ],
+      "created_at": "2014-01-07T18:18:08.471",
+      "description": "The most loved watchface for Pebble is now color!\r\n\r\nDisplay the current weather conditions and the forecast for the day by shaking your wrist twice. Optionally you can get the 3 day forecast by backing the project.\r\n\r\nYWeather tells you the time in 21 languages: english, spanish, italian, catalan, ... [truncated for fixture]",
+      "developer_id": "52cc34b045ffddf56900016f",
+      "developer_claimed": false,
+      "contactable": false,
+      "header_images": [],
+      "hearts": 18820,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "52cc44e045ffdd31dd000180",
+      "latest_release": {
+        "id": "57f3f1a405e4b103e70000a9",
+        "js_md5": "3c9f48d325fcc849caac6535893a4187",
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/57f3f1a405e4b103e70000a9.pbw",
+        "published_date": "2016-10-04T18:15:09.613",
+        "release_notes": "- Fix Yahoo Weather geolocation",
+        "settings_page_state": "page_loads",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "3.7"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/52cc44e045ffdd31dd000180/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/52cc44e045ffdd31dd000180/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/52cc44e045ffdd31dd000180/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/52cc44e045ffdd31dd000180/heart",
+        "share": "https://apps.rebble.io/application/52cc44e045ffdd31dd000180"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/icons/52cc44e045ffdd31dd000180.png",
+        "80x80": "https://assets.repebble.com/icons/52cc44e045ffdd31dd000180.png"
+      },
+      "published_date": "2015-05-07T22:42:35.563",
+      "screenshot_hardware": "basalt",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/52cc44e045ffdd31dd000180-1.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/screenshots/52cc44e045ffdd31dd000180-0.png"
+        }
+      ],
+      "source": null,
+      "title": "YWeather",
+      "type": "watchface",
+      "uuid": "35a28a4d-0c9f-408f-9c6d-551e65f03186",
+      "visible": true,
+      "website": "http://yweather.es/",
+      "icon_resource_id": 5
+    },
+    {
+      "author": "reno",
+      "capabilities": [
+        "location",
+        "configurable"
+      ],
+      "category": "Faces",
+      "category_color": "ffffff",
+      "category_id": "528d3ef2dc7b5f580700000a",
+      "changelog": [
+        {
+          "version": "4.0",
+          "published_date": "2021-04-28T22:09:11",
+          "release_notes": "Now uses OpenWeatherMap for weather data. Requires the use of a user-generated API key that can be added in settings."
+        },
+        {
+          "version": "3.3",
+          "published_date": "2016-01-23T07:45:09",
+          "release_notes": ""
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 201,
+          "name": "chalk",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/533966299820be90ed0000c5/icons/small.png",
+            "list": "https://assets.repebble.com/apps/533966299820be90ed0000c5/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/533966299820be90ed0000c5/screenshots/chalk/screenshot-0.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 137,
+          "name": "basalt",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/533966299820be90ed0000c5/icons/small.png",
+            "list": "https://assets.repebble.com/apps/533966299820be90ed0000c5/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/533966299820be90ed0000c5/screenshots/basalt/screenshot-0.gif"
+          }
+        },
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 73,
+          "name": "aplite",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/533966299820be90ed0000c5/icons/small.png",
+            "list": "https://assets.repebble.com/apps/533966299820be90ed0000c5/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/533966299820be90ed0000c5/screenshots/aplite/screenshot-0.gif"
+          }
+        }
+      ],
+      "created_at": "2014-03-31T12:57:13",
+      "description": "Forget simple icons, now there's beautiful snapshots of the sky on your Pebble. A unique face for every kind of day and night.\r\n\r\n\u2022 14+ weather designs\r\n\u2022 C/F, 30m refresh\r\n\u2022 Battery meter\r\n\u2022 DC Alert\r\n\r\nSend feedback + tap the heart if you dig it! :)\r\n\r\nLike Real Weather? Check out Love Weather and... [truncated for fixture]",
+      "developer_id": "52f013b5077b1db7990000c0",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [],
+      "hearts": 15882,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "533966299820be90ed0000c5",
+      "latest_release": {
+        "id": "6089dd071342ae67f46e358a",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/apps/533966299820be90ed0000c5/releases/4.0.pbw",
+        "published_date": "2021-04-28T22:09:11",
+        "release_notes": "Now uses OpenWeatherMap for weather data. Requires the use of a user-generated API key that can be added in settings.",
+        "settings_page_state": "page_loads",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "4.0"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/533966299820be90ed0000c5/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/533966299820be90ed0000c5/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/533966299820be90ed0000c5/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/533966299820be90ed0000c5/heart",
+        "share": "https://apps.rebble.io/application/533966299820be90ed0000c5"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/apps/533966299820be90ed0000c5/icons/large.png",
+        "80x80": "https://assets.repebble.com/apps/533966299820be90ed0000c5/icons/small.png"
+      },
+      "published_date": "2014-05-13T23:06:53",
+      "screenshot_hardware": "basalt",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/apps/533966299820be90ed0000c5/screenshots/basalt/screenshot-0.gif"
+        }
+      ],
+      "source": null,
+      "title": "Real Weather",
+      "type": "watchface",
+      "uuid": "1f0b0701-cc8f-47ec-86e7-7181397f9a52",
+      "visible": true,
+      "website": "http://client.flip.net.au/reno/pebble.html",
+      "icon_resource_id": 18
+    },
+    {
+      "author": "Freakified",
+      "capabilities": [
+        "health",
+        "location",
+        "configurable"
+      ],
+      "category": "Faces",
+      "category_color": "ffffff",
+      "category_id": "528d3ef2dc7b5f580700000a",
+      "changelog": [
+        {
+          "version": "7.11.2",
+          "published_date": "2026-06-05T10:19:39.532",
+          "release_notes": "7.11.2\r\n- Fix an issue where weather would continue to update even if no weather widgets were selected (thanks Mugendon for the report!)"
+        },
+        {
+          "version": "7.11.1",
+          "published_date": "2026-06-01T13:41:29.293",
+          "release_notes": "v7.11.1\r\n- Increase width of the sidebar on Time 2 when large fonts are selected, to better fit date widget"
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 73,
+          "name": "aplite",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/55a5c024f4510f794c000071/small/da175d54-cae2-4ddd-b3c9-17db553c656a.png",
+            "list": "https://assets.repebble.com/icons/55a5c024f4510f794c000071/large/79ad34ef-48c1-4464-a32d-d0d6d102ab5e.png",
+            "screenshot": "https://assets.repebble.com/apps/55a5c024f4510f794c000071/screenshots/aplite/screenshot-0.gif"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 137,
+          "name": "basalt",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/55a5c024f4510f794c000071/small/da175d54-cae2-4ddd-b3c9-17db553c656a.png",
+            "list": "https://assets.repebble.com/icons/55a5c024f4510f794c000071/large/79ad34ef-48c1-4464-a32d-d0d6d102ab5e.png",
+            "screenshot": "https://assets.repebble.com/apps/55a5c024f4510f794c000071/screenshots/basalt/screenshot-0.gif"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 201,
+          "name": "chalk",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/55a5c024f4510f794c000071/small/da175d54-cae2-4ddd-b3c9-17db553c656a.png",
+            "list": "https://assets.repebble.com/icons/55a5c024f4510f794c000071/large/79ad34ef-48c1-4464-a32d-d0d6d102ab5e.png",
+            "screenshot": "https://assets.repebble.com/apps/55a5c024f4510f794c000071/screenshots/chalk/screenshot-0.gif"
+          }
+        }
+      ],
+      "created_at": "2015-07-15T02:06:28",
+      "description": "Digital. Readable. Completely customizable.\r\n\r\n*** New for 2026: Full support for Time 2 and Round 2! ***\r\n\r\nThe Timeline handles the past and the future: let TimeStyle handle your present!\r\n\r\n\u2022 Time you can see, even in the dark!\r\nWith more than 80% of the display devoted to the time and multiple f... [truncated for fixture]",
+      "developer_id": "534d74f861fcaa8033000263",
+      "developer_claimed": true,
+      "contactable": false,
+      "header_images": [],
+      "hearts": 15345,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "55a5c024f4510f794c000071",
+      "latest_release": {
+        "id": "248643ac3de04c9fb2110d62",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/55a5c024f4510f794c000071/7.11.2/2063a539-edc3-4a9e-ae8f-d30f71ee1cc8.pbw",
+        "published_date": "2026-06-05T10:19:39.532",
+        "release_notes": "7.11.2\r\n- Fix an issue where weather would continue to update even if no weather widgets were selected (thanks Mugendon for the report!)",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "7.11.2"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/55a5c024f4510f794c000071/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/55a5c024f4510f794c000071/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/55a5c024f4510f794c000071/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/55a5c024f4510f794c000071/heart",
+        "share": "https://apps.rebble.io/application/55a5c024f4510f794c000071"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/icons/55a5c024f4510f794c000071/large/79ad34ef-48c1-4464-a32d-d0d6d102ab5e.png",
+        "80x80": "https://assets.repebble.com/icons/55a5c024f4510f794c000071/small/da175d54-cae2-4ddd-b3c9-17db553c656a.png"
+      },
+      "published_date": "2015-07-15T13:46:45",
+      "screenshot_hardware": "emery",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/55a5c024f4510f794c000071/emery/1860276d-0d67-4713-a1a5-e53234bb9201.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/screenshots/55a5c024f4510f794c000071/emery/01a36eda-044a-46fe-845a-f5b26ff8efe3.png"
+        }
+      ],
+      "source": "https://github.com/freakified/TimeStylePebble",
+      "title": "TimeStyle",
+      "type": "watchface",
+      "uuid": "4368ffa4-f0fb-4823-90be-f754b076bdaa",
+      "visible": true,
+      "website": null,
+      "icon_resource_id": 1
+    }
+  ],
+  "limit": 3,
+  "offset": 0,
+  "links": {
+    "nextPage": "https://appstore-api.repebble.com/api/v1/apps/collection/most-loved/watchfaces?hardware=emery&limit=3&offset=3"
+  }
+}

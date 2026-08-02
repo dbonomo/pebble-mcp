@@ -1,0 +1,72 @@
+[project]
+name = "pebble-mcp"
+version = "0.1.0"
+description = "MCP server for the Pebble smartwatch ecosystem: appstore search, a 64-color design toolkit, and the local dev loop (build, emulator, screenshot flows)."
+readme = "README.md"
+requires-python = ">=3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Daniel Bonomo", email = "d.z.bonomo@gmail.com" },
+]
+keywords = [
+    "pebble",
+    "mcp",
+    "watchface",
+    "model-context-protocol",
+    "rebble",
+]
+classifiers = [
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development",
+]
+dependencies = [
+    "mcp>=1.9.0",
+    # Pillow powers the Tier 2 design toolkit (swatch/quantize/prep). It is a
+    # headline feature, so it ships as a core dependency. capabilities() still
+    # probes for it at runtime and degrades Tier 2 gracefully if it is absent.
+    "pillow>=10.0.0",
+]
+
+[project.optional-dependencies]
+# Retained as an alias so existing `uv sync --extra design` invocations keep
+# working; Pillow is already pulled in by the core dependencies above.
+design = [
+    "pillow>=10.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/dbonomo/pebble-mcp"
+Repository = "https://github.com/dbonomo/pebble-mcp"
+Issues = "https://github.com/dbonomo/pebble-mcp/issues"
+
+[project.scripts]
+pebble-mcp = "pebble_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["pebble_mcp"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

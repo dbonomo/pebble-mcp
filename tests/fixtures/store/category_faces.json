@@ -1,0 +1,461 @@
+{
+  "data": [
+    {
+      "author": "Zac West",
+      "capabilities": [
+        "configurable",
+        "location"
+      ],
+      "category": "Faces",
+      "category_color": "ffffff",
+      "category_id": "528d3ef2dc7b5f580700000a",
+      "changelog": [
+        {
+          "version": "0.1.0",
+          "published_date": "2026-05-12T19:29:33.926",
+          "release_notes": "Initial release"
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.95",
+          "pebble_process_info_flags": 393,
+          "name": "flint",
+          "description": "Three bands of date, a big time, and configurable complications.\r\n\r\n---\r\n\r\n- Weather by Open-Mateo  https://open-meteo.com\r\n- JetBrains Mono ExtraBold (OFL 1.1): https://www.jetbrains.com/lp/mono/\r\n- Iconography (1-bit icons under Apache 2.0): https://github.com/pebble-dev/iconography",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/ffe77f70fb6e44fe80c90cb6/small/a2603d7e-0292-494c-af86-8e3d807ce4fe.png",
+            "list": "https://assets.repebble.com/icons/ffe77f70fb6e44fe80c90cb6/large/611dcc1f-18f4-420c-be16-4bc100cb0ca1.png",
+            "screenshot": "https://assets.repebble.com/screenshots/ffe77f70fb6e44fe80c90cb6/flint/b16ad493-9eaa-4540-96e3-8ae2baf9cee0.png"
+          }
+        },
+        {
+          "sdk_version": "5.95",
+          "pebble_process_info_flags": 329,
+          "name": "emery",
+          "description": "Three bands of date, a big time, and configurable complications.\r\n\r\n---\r\n\r\n- Weather by Open-Mateo  https://open-meteo.com\r\n- JetBrains Mono ExtraBold (OFL 1.1): https://www.jetbrains.com/lp/mono/\r\n- Iconography (1-bit icons under Apache 2.0): https://github.com/pebble-dev/iconography",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/ffe77f70fb6e44fe80c90cb6/small/a2603d7e-0292-494c-af86-8e3d807ce4fe.png",
+            "list": "https://assets.repebble.com/icons/ffe77f70fb6e44fe80c90cb6/large/611dcc1f-18f4-420c-be16-4bc100cb0ca1.png",
+            "screenshot": "https://assets.repebble.com/screenshots/ffe77f70fb6e44fe80c90cb6/emery/5b65dc1b-6bc3-4ce5-83ba-6f35782656bd.png"
+          }
+        }
+      ],
+      "created_at": "2026-05-12T19:29:33.878",
+      "description": "Three bands of date, a big time, and configurable complications.\r\n\r\n---\r\n\r\n- Weather by Open-Meteo: https://open-meteo.com\r\n- JetBrains Mono ExtraBold (OFL 1.1): https://www.jetbrains.com/lp/mono/\r\n- Iconography (1-bit icons under Apache 2.0): https://github.com/pebble-dev/iconography",
+      "developer_id": "0ab393df5c2cc212f1c9c320",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [],
+      "hearts": 4,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "ffe77f70fb6e44fe80c90cb6",
+      "latest_release": {
+        "id": "4616db31bf5d4ff2b9674088",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/ffe77f70fb6e44fe80c90cb6/0.1.0/e9344893-8304-407b-bafa-ccf774be5eea.pbw",
+        "published_date": "2026-05-12T19:29:33.926",
+        "release_notes": "Initial release",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "0.1.0"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/ffe77f70fb6e44fe80c90cb6/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/ffe77f70fb6e44fe80c90cb6/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/ffe77f70fb6e44fe80c90cb6/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/ffe77f70fb6e44fe80c90cb6/heart",
+        "share": "https://apps.rebble.io/application/ffe77f70fb6e44fe80c90cb6"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/icons/ffe77f70fb6e44fe80c90cb6/large/611dcc1f-18f4-420c-be16-4bc100cb0ca1.png",
+        "80x80": "https://assets.repebble.com/icons/ffe77f70fb6e44fe80c90cb6/small/a2603d7e-0292-494c-af86-8e3d807ce4fe.png"
+      },
+      "published_date": null,
+      "screenshot_hardware": "emery",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/ffe77f70fb6e44fe80c90cb6/emery/5b65dc1b-6bc3-4ce5-83ba-6f35782656bd.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/screenshots/ffe77f70fb6e44fe80c90cb6/emery/550f94e6-63cf-4e8e-b81c-454806a4c7b5.png"
+        }
+      ],
+      "source": "https://github.com/zacwest/postcard-watchface",
+      "title": "Postcard",
+      "type": "watchface",
+      "uuid": "57c94a73-5efd-4912-9a14-4cfdaae14b47",
+      "visible": true,
+      "website": null,
+      "icon_resource_id": 0
+    },
+    {
+      "author": "George Ruinelli",
+      "capabilities": [
+        "configurable",
+        "health",
+        "location"
+      ],
+      "category": "Faces",
+      "category_color": "ffffff",
+      "category_id": "528d3ef2dc7b5f580700000a",
+      "changelog": [
+        {
+          "version": "7.11.5",
+          "published_date": "2026-06-16T23:32:50.608",
+          "release_notes": "Added battery reporting"
+        },
+        {
+          "version": "7.11.4",
+          "published_date": "2026-06-16T23:18:29.408",
+          "release_notes": "Added battery reporting"
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.95",
+          "pebble_process_info_flags": 393,
+          "name": "flint",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/ff9fb51545554a3197d047c4/small/e6134fee-0326-4b51-b7df-650d4c75e358.png",
+            "list": "",
+            "screenshot": "https://assets.repebble.com/screenshots/ff9fb51545554a3197d047c4/flint/36493e5e-1537-47cd-9c37-d2a6a02229da.png"
+          }
+        },
+        {
+          "sdk_version": "5.95",
+          "pebble_process_info_flags": 457,
+          "name": "gabbro",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/ff9fb51545554a3197d047c4/small/e6134fee-0326-4b51-b7df-650d4c75e358.png",
+            "list": "",
+            "screenshot": "https://assets.repebble.com/screenshots/ff9fb51545554a3197d047c4/gabbro/e7bbc79d-769c-42f5-a547-44c2e6a23211.png"
+          }
+        },
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 73,
+          "name": "aplite",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/ff9fb51545554a3197d047c4/small/e6134fee-0326-4b51-b7df-650d4c75e358.png",
+            "list": "",
+            "screenshot": "https://assets.repebble.com/screenshots/ff9fb51545554a3197d047c4/aplite/ed520c7b-32b1-4f13-ab18-fda583955ba0.png"
+          }
+        }
+      ],
+      "created_at": "2026-06-16T22:41:59.79",
+      "description": "TimeStylePebble with battery reporting.\r\n\r\nThis is based on https://apps.rebble.io/en_US/application/55a5c024f4510f794c000071 but extended with battery reporting to a webhook",
+      "developer_id": "52c9626e6025fc7211000054",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [],
+      "hearts": 8,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "ff9fb51545554a3197d047c4",
+      "latest_release": {
+        "id": "082a55518f3f43fc878c373a",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/ff9fb51545554a3197d047c4/7.11.5/ee92df1c-f389-4e35-b400-86a495d7166d.pbw",
+        "published_date": "2026-06-16T23:32:50.608",
+        "release_notes": "Added battery reporting",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "7.11.5"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/ff9fb51545554a3197d047c4/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/ff9fb51545554a3197d047c4/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/ff9fb51545554a3197d047c4/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/ff9fb51545554a3197d047c4/heart",
+        "share": "https://apps.rebble.io/application/ff9fb51545554a3197d047c4"
+      },
+      "list_image": {
+        "144x144": "",
+        "80x80": "https://assets.repebble.com/icons/ff9fb51545554a3197d047c4/small/e6134fee-0326-4b51-b7df-650d4c75e358.png"
+      },
+      "published_date": null,
+      "screenshot_hardware": "emery",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/ff9fb51545554a3197d047c4/emery/3dfb71bb-4fbc-48ec-8424-55ac7bf58a37.png"
+        }
+      ],
+      "source": "https://github.com/caco3/TimeStylePebble",
+      "title": "TimeStyle with battery reporting",
+      "type": "watchface",
+      "uuid": "ce251833-ca00-4656-9a37-2bb2051a878f",
+      "visible": true,
+      "website": "https://github.com/caco3/TimeStylePebble",
+      "icon_resource_id": 1
+    },
+    {
+      "author": "JakacBatko",
+      "capabilities": [
+        "location"
+      ],
+      "category": "Faces",
+      "category_color": "ffffff",
+      "category_id": "528d3ef2dc7b5f580700000a",
+      "changelog": [
+        {
+          "version": "1.0.0",
+          "published_date": "2026-06-19T16:21:28.467",
+          "release_notes": ""
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.95",
+          "pebble_process_info_flags": 457,
+          "name": "gabbro",
+          "description": "A clean, classic watchface with a dark theme and timeless design. Displays the time, date, and weather at a glance while keeping the layout simple yet information-rich. Elegant, easy to read, and perfect for everyday use.",
+          "images": {
+            "icon": "",
+            "list": "",
+            "screenshot": "https://assets.repebble.com/screenshots/ff7df7013a274ce6b35dcc62/gabbro/12cc097b-22c2-4259-a4a4-f53cca4325d5.png"
+          }
+        }
+      ],
+      "created_at": "2026-06-19T16:21:28.431",
+      "description": "A clean, classic watchface with a dark theme and timeless design. Displays the time, date, and weather at a glance while keeping the layout simple yet information-rich. Elegant, easy to read, and perfect for everyday use.",
+      "developer_id": "356cef329d19c2f11c223761",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [],
+      "hearts": 5,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "ff7df7013a274ce6b35dcc62",
+      "latest_release": {
+        "id": "808e5550e53144b984c613df",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/ff7df7013a274ce6b35dcc62/1.0.0/0d846a1b-8b92-43ce-8d4e-b285a20dcf07.pbw",
+        "published_date": "2026-06-19T16:21:28.467",
+        "release_notes": "",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "1.0.0"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/ff7df7013a274ce6b35dcc62/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/ff7df7013a274ce6b35dcc62/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/ff7df7013a274ce6b35dcc62/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/ff7df7013a274ce6b35dcc62/heart",
+        "share": "https://apps.rebble.io/application/ff7df7013a274ce6b35dcc62"
+      },
+      "list_image": {
+        "144x144": "",
+        "80x80": ""
+      },
+      "published_date": null,
+      "screenshot_hardware": "gabbro",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/ff7df7013a274ce6b35dcc62/gabbro/12cc097b-22c2-4259-a4a4-f53cca4325d5.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/screenshots/ff7df7013a274ce6b35dcc62/gabbro/6b94628e-fcdc-4b26-856a-dd91597fe243.gif"
+        }
+      ],
+      "source": null,
+      "title": "Meridian Night",
+      "type": "watchface",
+      "uuid": "6aa50bdf-4e0e-438b-b73d-f6199af39c70",
+      "visible": true,
+      "website": null,
+      "icon_resource_id": 0
+    }
+  ],
+  "limit": 3,
+  "offset": 0,
+  "links": {
+    "nextPage": "https://appstore-api.repebble.com/api/v1/apps/category/faces?hardware=emery&limit=3&offset=3"
+  }
+}

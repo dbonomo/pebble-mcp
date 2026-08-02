@@ -1,0 +1,217 @@
+{
+  "data": [
+    {
+      "author": "Logan Head",
+      "capabilities": [
+        "configurable",
+        "location"
+      ],
+      "category": "Tools & Utilities",
+      "category_color": "fdbf37",
+      "category_id": "5261a8fb3b773043d500000f",
+      "changelog": [
+        {
+          "version": "1.0",
+          "published_date": "2026-02-14T01:03:26",
+          "release_notes": "+ Initial release"
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 264,
+          "name": "diorite",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/diorite/screenshot-0.png"
+          }
+        },
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 72,
+          "name": "aplite",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/aplite/screenshot-0.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 200,
+          "name": "chalk",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/chalk/screenshot-0.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 136,
+          "name": "basalt",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/basalt/screenshot-0.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 328,
+          "name": "emery",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/emery/screenshot-0.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 392,
+          "name": "flint",
+          "description": "",
+          "images": {
+            "icon": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png",
+            "list": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+            "screenshot": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/flint/screenshot-0.png"
+          }
+        }
+      ],
+      "created_at": "2026-02-14T01:03:25",
+      "description": "An astronomy app for Pebble. It uses the time and your location to obtain the azimuth & altitude of the sun, moon, planets, and various constellations. Eligible bodies will also display their phase, rise & set times, and relative illumination levels. No internet access required.\r\n\r\nLocate these obje... [truncated for fixture]",
+      "developer_id": "5c26a4f727cdec0001c0500d",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [
+        {
+          "720x320": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/headers/basalt/header-0.png",
+          "orig": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/headers/basalt/header-0.png"
+        }
+      ],
+      "hearts": 78,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "698fc9d8086643000aef17a3",
+      "latest_release": {
+        "id": "698fc9de086643000aef17c4",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/apps/698fc9d8086643000aef17a3/releases/1.0.pbw",
+        "published_date": "2026-02-14T01:03:26",
+        "release_notes": "+ Initial release",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "1.0"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/698fc9d8086643000aef17a3/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/698fc9d8086643000aef17a3/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/698fc9d8086643000aef17a3/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/698fc9d8086643000aef17a3/heart",
+        "share": "https://apps.rebble.io/application/698fc9d8086643000aef17a3"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/large.png",
+        "80x80": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/icons/small.png"
+      },
+      "published_date": "2026-04-02T19:39:57.712",
+      "screenshot_hardware": "basalt",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/basalt/screenshot-0.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/basalt/screenshot-1.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/basalt/screenshot-2.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/basalt/screenshot-3.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/apps/698fc9d8086643000aef17a3/screenshots/basalt/screenshot-4.png"
+        }
+      ],
+      "source": "https://github.com/erlog135/hubble",
+      "title": "Hubble",
+      "type": "watchapp",
+      "uuid": "4fca3013-c56a-4870-8629-81b379f917e0",
+      "visible": true,
+      "website": "https://loganhead.net",
+      "icon_resource_id": 1
+    }
+  ],
+  "limit": 1,
+  "offset": 0,
+  "links": {
+    "nextPage": null
+  }
+}

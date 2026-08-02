@@ -1,0 +1,13 @@
+# hail-watch flow
+# No live-write hazards: this app is read-only (fetches state.json, no POSTs).
+# Requires a state.json served on http://localhost:8091/state.json (the app default).
+# down = next screen (Banner -> Home -> Ski), up = previous.
+app hail-watch
+wait 8
+shot banner                    # full-screen threat-level banner
+press down
+wait 1
+shot home                      # home summary + forecast periods
+press down
+wait 1
+shot ski                       # ski areas list

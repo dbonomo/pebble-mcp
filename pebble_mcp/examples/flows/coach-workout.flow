@@ -1,0 +1,43 @@
+# coach-workout flow
+# SAFETY RULES (live-write hazards — DO NOT TRIGGER):
+#   - NEVER `press select` while on the "Done! / Send to Coach" SUMMARY screen —
+#     that POSTs the workout to the live server AND fires the Discord webhook.
+#     Capturing the summary is fine: longpress select on the TITLE builds the
+#     summary, shoot it, then STOP. Do NOT press select again after that.
+#   - Logging sets on-watch (select on an exercise) is LOCAL ONLY until Send, so it
+#     is safe. Long-select on an exercise completes it as planned (local, safe).
+#   - Stopping the plank timer (select while it runs) logs LOCAL only — safe.
+app coach-workout
+wait 8
+shot title                     # "Strength Day A" / N exercises
+press select                   # -> exercise 1 (Goblet squat, reps)
+wait 2
+shot exercise-1-reps
+press up                       # weight +step
+press up                       # weight +step
+wait 1
+shot weight-adjusted
+longpress select 600           # complete ex1 as planned -> ex2
+wait 1
+longpress select 600           # complete ex2 -> ex3
+wait 1
+longpress select 600           # complete ex3 -> ex4
+wait 1
+longpress select 600           # complete ex4 -> ex5
+wait 1
+longpress select 600           # complete ex5 -> ex6 (Plank, timed)
+wait 1
+shot plank-ready               # timed exercise screen (before start)
+press select                   # start the plank hold timer
+wait 3
+shot plank-running             # timer counting
+press select                   # STOP timer (records set locally, advances) — SAFE
+wait 1
+shot plank-set2
+# reinstall to reset to a clean TITLE, then build the summary and STOP.
+app coach-workout
+wait 8
+longpress select 600           # TITLE -> fills plan -> SUMMARY (Send to Coach)
+wait 2
+shot summary-send-to-coach
+# STOP. Absolutely no `press select` here — it would POST to the live server.

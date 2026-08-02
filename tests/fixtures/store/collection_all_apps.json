@@ -1,0 +1,342 @@
+{
+  "data": [
+    {
+      "author": "BD Crowell",
+      "capabilities": [
+        "location",
+        "configurable"
+      ],
+      "category": "Health & Fitness",
+      "category_color": "98D500",
+      "category_id": "5261a8fb3b773043d5000004",
+      "changelog": [
+        {
+          "version": "1.3.1",
+          "published_date": "2026-07-18T23:02:12.917",
+          "release_notes": "AirCheck v1.3.1\r\n\r\n- Added United States and European AQI scale selection.\r\n- Added optional fixed-location lookup by city or postal code and country code.\r\n- Added native Diorite, Emery, Flint, and Gabbro builds.\r\n- Added scale-aware AQI guidance and native high-resolution layouts."
+        },
+        {
+          "version": "1.2",
+          "published_date": "2026-04-17T09:51:36.439",
+          "release_notes": "AirCheck 1.2\r\n\r\n- Added Celsius/Fahrenheit toggle in Settings\r\n- Fixed issue where unit changes didn\u2019t apply\r\n- Simplified temperature handling for better reliability\r\n\r\nNo changes to AQI or recommendation logic."
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 72,
+          "name": "aplite",
+          "description": "AirCheck gives you a fast, simple answer to one question:\r\nshould you go outside right now?\r\n\r\nUsing real-time air quality (AQI) and weather data, AirCheck gives you a simple, instant recommendation:\r\n\r\nGO OUT\r\nCAUTION\r\nSTAY IN\r\n\r\nFeatures\r\n- Real-time AQI and weather courtesy of Open-Meteo\r\n- Temperature-aware recommendations\r\n- Thunderstorm safety override\r\n- Clear reason text explaining each recommendation\r\n- Simple, easy-to-read interface\r\n- Manual refresh on launch and button press\r\n- Works across all Pebble watch types\r\n\r\nNo clutter. No confusing settings. Just a clear answer when you need it.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/69cbba0e4fec4ab29374da39/small/4f198ed1-e942-43b3-8843-76e0169c1f1e.png",
+            "list": "https://assets.repebble.com/icons/69cbba0e4fec4ab29374da39/large/afc5e293-73db-4717-bffc-dfbcf2cc9599.png",
+            "screenshot": "https://assets.repebble.com/screenshots/69cbba0e4fec4ab29374da39/aplite/cb84c5f6-66b7-4c65-a9b4-52da7636cf54.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 136,
+          "name": "basalt",
+          "description": "AirCheck gives you a fast, simple answer to one question:\r\nshould you go outside right now?\r\n\r\nUsing real-time air quality (AQI) and weather data, AirCheck gives you a simple, instant recommendation:\r\n\r\nGO OUT\r\nCAUTION\r\nSTAY IN\r\n\r\nFeatures\r\n- Real-time AQI and weather courtesy of Open-Meteo\r\n- Temperature-aware recommendations\r\n- Thunderstorm safety override\r\n- Clear reason text explaining each recommendation\r\n- Simple, easy-to-read interface\r\n- Manual refresh on launch and button press\r\n- Works across all Pebble watch types\r\n\r\nNo clutter. No confusing settings. Just a clear answer when you need it.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/69cbba0e4fec4ab29374da39/small/4f198ed1-e942-43b3-8843-76e0169c1f1e.png",
+            "list": "https://assets.repebble.com/icons/69cbba0e4fec4ab29374da39/large/afc5e293-73db-4717-bffc-dfbcf2cc9599.png",
+            "screenshot": "https://assets.repebble.com/screenshots/69cbba0e4fec4ab29374da39/basalt/f04ee9b6-07c6-4b80-a5b9-c6368111b065.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 200,
+          "name": "chalk",
+          "description": "AirCheck gives you a fast, simple answer to one question:\r\nshould you go outside right now?\r\n\r\nUsing real-time air quality (AQI) and weather data, AirCheck gives you a simple, instant recommendation:\r\n\r\nGO OUT\r\nCAUTION\r\nSTAY IN\r\n\r\nFeatures\r\n- Real-time AQI and weather courtesy of Open-Meteo\r\n- Temperature-aware recommendations\r\n- Thunderstorm safety override\r\n- Clear reason text explaining each recommendation\r\n- Simple, easy-to-read interface\r\n- Manual refresh on launch and button press\r\n- Works across all Pebble watch types\r\n\r\nNo clutter. No confusing settings. Just a clear answer when you need it.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/69cbba0e4fec4ab29374da39/small/4f198ed1-e942-43b3-8843-76e0169c1f1e.png",
+            "list": "https://assets.repebble.com/icons/69cbba0e4fec4ab29374da39/large/afc5e293-73db-4717-bffc-dfbcf2cc9599.png",
+            "screenshot": "https://assets.repebble.com/screenshots/69cbba0e4fec4ab29374da39/chalk/b87a9567-9191-4982-b73a-2a3abb875374.png"
+          }
+        }
+      ],
+      "created_at": "2026-04-12T17:37:14.852",
+      "description": "AirCheck gives you a fast, simple answer to one question:\r\nshould you go outside right now?\r\n\r\nUsing real-time air quality (AQI) and weather data, AirCheck gives you a simple, instant recommendation:\r\n\r\nGO OUT\r\nCAUTION\r\nSTAY IN\r\n\r\nFeatures\r\n- Real-time AQI and weather courtesy of Open-Meteo\r\n- Tempe... [truncated for fixture]",
+      "developer_id": "bc77df078bf00f8502c00039",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [],
+      "hearts": 15,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "69cbba0e4fec4ab29374da39",
+      "latest_release": {
+        "id": "ba7fe31876384b62960bea40",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/69cbba0e4fec4ab29374da39/1.3.1/facf50a5-cdfd-403e-ac9c-16f8389287e9.pbw",
+        "published_date": "2026-07-18T23:02:12.917",
+        "release_notes": "AirCheck v1.3.1\r\n\r\n- Added United States and European AQI scale selection.\r\n- Added optional fixed-location lookup by city or postal code and country code.\r\n- Added native Diorite, Emery, Flint, and Gabbro builds.\r\n- Added scale-aware AQI guidance and native high-resolution layouts.",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "1.3.1"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/69cbba0e4fec4ab29374da39/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/69cbba0e4fec4ab29374da39/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/69cbba0e4fec4ab29374da39/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/69cbba0e4fec4ab29374da39/heart",
+        "share": "https://apps.rebble.io/application/69cbba0e4fec4ab29374da39"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/icons/69cbba0e4fec4ab29374da39/large/afc5e293-73db-4717-bffc-dfbcf2cc9599.png",
+        "80x80": "https://assets.repebble.com/icons/69cbba0e4fec4ab29374da39/small/4f198ed1-e942-43b3-8843-76e0169c1f1e.png"
+      },
+      "published_date": null,
+      "screenshot_hardware": "aplite",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/69cbba0e4fec4ab29374da39/aplite/cb84c5f6-66b7-4c65-a9b4-52da7636cf54.png"
+        },
+        {
+          "144x168": "https://assets.repebble.com/screenshots/69cbba0e4fec4ab29374da39/aplite/f4b06100-06f7-4e80-b980-505d7723aebd.png"
+        }
+      ],
+      "source": null,
+      "title": "AirCheck",
+      "type": "watchapp",
+      "uuid": "6376dea3-7bf4-42d0-937a-33c1be9d32f7",
+      "visible": true,
+      "website": null,
+      "icon_resource_id": 0
+    },
+    {
+      "author": "Jason Marquette",
+      "capabilities": [
+        "configurable"
+      ],
+      "category": "Tools & Utilities",
+      "category_color": "fdbf37",
+      "category_id": "5261a8fb3b773043d500000f",
+      "changelog": [
+        {
+          "version": "1.1.0",
+          "published_date": "2026-07-18T16:36:06.409",
+          "release_notes": "Mini METAR Pebble v1.1.0\r\n\r\nNew:\r\n\r\nAutomatic weather refresh now initiated by the watch every 5 minutes.\r\nMore reliable operation on original Pebble and Pebble Steel devices.\r\nFixed:\r\n\r\nConfiguration page restored and deployed with the website.\r\nCorrected weather age/status display.\r\nImproved communication between watch and PebbleKit JS.\r\nGeneral stability improvements."
+        },
+        {
+          "version": "1.0.0",
+          "published_date": "2026-07-17T21:33:36.143",
+          "release_notes": "## Mini METAR v1.0.0\r\n\r\nInitial public release!\r\n\r\nMini METAR brings current aviation weather (METAR) directly to your Pebble watch.\r\n\r\n### Features\r\n\r\n- Live METAR weather for any ICAO airport\r\n- Configurable airport selection\r\n- Save up to 10 favorite airports\r\n- Flight category display (VFR, MVFR, IFR, LIFR)\r\n- Temperature in \u00b0F or \u00b0C\r\n- Altimeter in inHg or hPa\r\n- Wind direction and speed\r\n- Observation time and METAR age\r\n- Manual and automatic weather refresh\r\n- Support for Pebble Steel, Pebble Time, Pebble Time Steel, Pebble 2, Pebble Round, and compatible Rebble devices\r\n\r\nThank you for trying Mini METAR! Feedback, bug reports, and feature requests are always welcome."
+        }
+      ],
+      "companions": {
+        "android": null,
+        "ios": null
+      },
+      "compatibility": {
+        "aplite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "basalt": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "chalk": {
+          "supported": false,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "diorite": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "emery": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "flint": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "gabbro": {
+          "supported": true,
+          "firmware": {
+            "major": 3
+          }
+        },
+        "android": {
+          "supported": true
+        },
+        "ios": {
+          "supported": true,
+          "min_js_version": 1
+        }
+      },
+      "hardware_platforms": [
+        {
+          "sdk_version": "5.78",
+          "pebble_process_info_flags": 72,
+          "name": "aplite",
+          "description": "Mini METAR brings current aviation weather directly to your Pebble smartwatch. View live METAR information for any ICAO airport, including flight category, temperature, wind, altimeter setting, and observation time.\r\n\r\nConfigure your preferred airport, save up to 10 favorite airports for quick access, choose between Fahrenheit or Celsius and inHg or hPa, and refresh weather manually or automatically.\r\n\r\nDesigned for pilots, aviation enthusiasts, and anyone who wants quick access to airport weather from their wrist. Compatible with Pebble and Rebble-supported devices, including Pebble Steel, Pebble Time, Pebble Time Steel, Pebble 2, Pebble Round, and other supported models.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/23eaa3d5cc07456fa6c2f03b/small/c4f88a90-8340-46fc-bff3-40dd16f8324f.png",
+            "list": "https://assets.repebble.com/icons/23eaa3d5cc07456fa6c2f03b/large/8d91f162-203a-4a4f-80b0-77abd5b06201.png",
+            "screenshot": "https://assets.repebble.com/screenshots/23eaa3d5cc07456fa6c2f03b/aplite/6f426f70-b1f3-43a7-b5d0-fde774f8c180.png"
+          }
+        },
+        {
+          "sdk_version": "5.86",
+          "pebble_process_info_flags": 136,
+          "name": "basalt",
+          "description": "Mini METAR brings current aviation weather directly to your Pebble smartwatch. View live METAR information for any ICAO airport, including flight category, temperature, wind, altimeter setting, and observation time.\r\n\r\nConfigure your preferred airport, save up to 10 favorite airports for quick access, choose between Fahrenheit or Celsius and inHg or hPa, and refresh weather manually or automatically.\r\n\r\nDesigned for pilots, aviation enthusiasts, and anyone who wants quick access to airport weather from their wrist. Compatible with Pebble and Rebble-supported devices, including Pebble Steel, Pebble Time, Pebble Time Steel, Pebble 2, Pebble Round, and other supported models.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/23eaa3d5cc07456fa6c2f03b/small/c4f88a90-8340-46fc-bff3-40dd16f8324f.png",
+            "list": "https://assets.repebble.com/icons/23eaa3d5cc07456fa6c2f03b/large/8d91f162-203a-4a4f-80b0-77abd5b06201.png",
+            "screenshot": "https://assets.repebble.com/screenshots/23eaa3d5cc07456fa6c2f03b/basalt/da1d9c2c-094a-474b-bf8d-e263041dede7.png"
+          }
+        },
+        {
+          "sdk_version": "5.101",
+          "pebble_process_info_flags": 328,
+          "name": "emery",
+          "description": "Mini METAR brings current aviation weather directly to your Pebble smartwatch. View live METAR information for any ICAO airport, including flight category, temperature, wind, altimeter setting, and observation time.\r\n\r\nConfigure your preferred airport, save up to 10 favorite airports for quick access, choose between Fahrenheit or Celsius and inHg or hPa, and refresh weather manually or automatically.\r\n\r\nDesigned for pilots, aviation enthusiasts, and anyone who wants quick access to airport weather from their wrist. Compatible with Pebble and Rebble-supported devices, including Pebble Steel, Pebble Time, Pebble Time Steel, Pebble 2, Pebble Round, and other supported models.",
+          "images": {
+            "icon": "https://assets.repebble.com/icons/23eaa3d5cc07456fa6c2f03b/small/c4f88a90-8340-46fc-bff3-40dd16f8324f.png",
+            "list": "https://assets.repebble.com/icons/23eaa3d5cc07456fa6c2f03b/large/8d91f162-203a-4a4f-80b0-77abd5b06201.png",
+            "screenshot": "https://assets.repebble.com/screenshots/23eaa3d5cc07456fa6c2f03b/emery/490f19bf-e9fd-404d-8b72-6564014d9254.png"
+          }
+        }
+      ],
+      "created_at": "2026-07-17T21:33:36.093",
+      "description": "Mini METAR brings current aviation weather directly to your Pebble smartwatch. View live METAR information for any ICAO airport, including flight category, temperature, wind, altimeter setting, and observation time.\r\n\r\nConfigure your preferred airport, save up to 10 favorite airports for quick acces... [truncated for fixture]",
+      "developer_id": "5bee80559abfa407b64d6d00",
+      "developer_claimed": true,
+      "contactable": true,
+      "header_images": [
+        {
+          "720x320": "https://assets.repebble.com/banners/23eaa3d5cc07456fa6c2f03b/gabbro/902ff3e6-adc9-422f-9292-0a43aadd3e16.png",
+          "orig": "https://assets.repebble.com/banners/23eaa3d5cc07456fa6c2f03b/gabbro/902ff3e6-adc9-422f-9292-0a43aadd3e16.png"
+        }
+      ],
+      "hearts": 3,
+      "icon_image": {
+        "28x28": "",
+        "48x48": ""
+      },
+      "id": "23eaa3d5cc07456fa6c2f03b",
+      "latest_release": {
+        "id": "853c97ff318d44d79838e251",
+        "js_md5": null,
+        "js_version": -1,
+        "pbw_file": "https://appstore-api.repebble.com/api/assets/pbw/23eaa3d5cc07456fa6c2f03b/1.1.0/fa2390ab-1380-47cb-a96b-cdd731b1860c.pbw",
+        "published_date": "2026-07-18T16:36:06.409",
+        "release_notes": "Mini METAR Pebble v1.1.0\r\n\r\nNew:\r\n\r\nAutomatic weather refresh now initiated by the watch every 5 minutes.\r\nMore reliable operation on original Pebble and Pebble Steel devices.\r\nFixed:\r\n\r\nConfiguration page restored and deployed with the website.\r\nCorrected weather age/status display.\r\nImproved communication between watch and PebbleKit JS.\r\nGeneral stability improvements.",
+        "settings_page_state": "no_page",
+        "companion_android_state": "no_companion",
+        "companion_ios_state": "no_companion",
+        "version": "1.1.0"
+      },
+      "links": {
+        "add": "https://a",
+        "add_flag": "https://appstore-api.rebble.io/api/v0/applications/23eaa3d5cc07456fa6c2f03b/add_flag",
+        "add_heart": "https://appstore-api.repebble.com/api/v1/apps/id/23eaa3d5cc07456fa6c2f03b/heart",
+        "remove": "https://b",
+        "remove_flag": "https://appstore-api.rebble.io/api/v0/applications/23eaa3d5cc07456fa6c2f03b/remove_flag",
+        "remove_heart": "https://appstore-api.repebble.com/api/v1/apps/id/23eaa3d5cc07456fa6c2f03b/heart",
+        "share": "https://apps.rebble.io/application/23eaa3d5cc07456fa6c2f03b"
+      },
+      "list_image": {
+        "144x144": "https://assets.repebble.com/icons/23eaa3d5cc07456fa6c2f03b/large/8d91f162-203a-4a4f-80b0-77abd5b06201.png",
+        "80x80": "https://assets.repebble.com/icons/23eaa3d5cc07456fa6c2f03b/small/c4f88a90-8340-46fc-bff3-40dd16f8324f.png"
+      },
+      "published_date": null,
+      "screenshot_hardware": "aplite",
+      "screenshot_images": [
+        {
+          "144x168": "https://assets.repebble.com/screenshots/23eaa3d5cc07456fa6c2f03b/aplite/6f426f70-b1f3-43a7-b5d0-fde774f8c180.png"
+        }
+      ],
+      "source": "https://github.com/jasonmarquette/mini-metar-pebble",
+      "title": "METAR Aviation Weather",
+      "type": "watchapp",
+      "uuid": "168d050a-5ee6-4441-bcb7-e07a1eaa58df",
+      "visible": true,
+      "website": null,
+      "icon_resource_id": 0
+    }
+  ],
+  "limit": 2,
+  "offset": 1,
+  "links": {
+    "nextPage": "https://appstore-api.repebble.com/api/v1/apps/collection/all/apps?hardware=aplite&limit=2&offset=3&sort=hearts"
+  }
+}

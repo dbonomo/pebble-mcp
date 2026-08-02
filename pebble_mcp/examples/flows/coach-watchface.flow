@@ -1,0 +1,8 @@
+# coach-watchface flow
+# No live-write hazards: the watchface only GETs /api/today (read-only).
+# Installing a watchface on emery makes it the active face directly (no launcher
+# navigation needed on this emulator). If a wipe ever drops you at the launcher,
+# select Watchfaces and pick "Coach" per HANDOFF.
+app coach-watchface
+wait 8
+shot coach-face                # live glance face: time, protein/cal bars, session chip, 7d weight
