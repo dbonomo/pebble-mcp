@@ -102,6 +102,10 @@ tests and as living documentation of the flow format, including the
 `# SAFETY RULES (live-write hazards — DO NOT TRIGGER):` convention that flow
 authors should follow for any app with server-mutating screens).
 
+## Changelog
+
+Release notes live in [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
 MIT — see [LICENSE](LICENSE). Copyright (c) 2026 Daniel Bonomo.

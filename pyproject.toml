@@ -1,6 +1,6 @@
 [project]
 name = "pebble-mcp"
-version = "0.1.0"
+version = "0.2.0"
 description = "MCP server for the Pebble smartwatch ecosystem: appstore search, a 64-color design toolkit, and the local dev loop (build, emulator, screenshot flows)."
 readme = "README.md"
 requires-python = ">=3.13"
@@ -24,7 +24,13 @@ classifiers = [
     "Topic :: Software Development",
 ]
 dependencies = [
-    "mcp>=1.9.0",
+    # Upper bound is load-bearing, not cautious: mcp 2.x renamed FastMCP to
+    # MCPServer and moved mcp.server.fastmcp, so `from mcp.server.fastmcp
+    # import FastMCP` in server.py raises ModuleNotFoundError on import under
+    # 2.x. 0.1.0 shipped this unbounded, which means a fresh `uvx pebble-mcp`
+    # resolves mcp 2.x and dies before the first tool call. Lift the pin only
+    # together with the MCPServer migration.
+    "mcp>=1.9.0,<2",
     # Pillow powers the Tier 2 design toolkit (swatch/quantize/prep). It is a
     # headline feature, so it ships as a core dependency. capabilities() still
     # probes for it at runtime and degrades Tier 2 gracefully if it is absent.

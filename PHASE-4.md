@@ -6,8 +6,14 @@
 > - ⏭️ **NEXT: U — publish** (store_generate_assets, then pebble_publish behind a
 >   confirmation handshake). Tier-4 auth needs a Rebble token + Dan's explicit go.
 > - 🔻 **LATER: Zig** (scaffolding + zig-pebble-sdk maintainer partnership) — do not pull forward.
-> - Loose ends: 0.1.1 release (fixes PyPI dzbonomo URL + demo GIF); two store LOWs
->   (stale "<1MB" comment; store_search has no candidate-pool cache across calls).
+> - Loose ends **closed in 0.2.0** (2026-09-10): the PyPI/GitHub URL is `dbonomo`
+>   everywhere, the demo GIF uses an absolute raw URL, and the stale "<1MB" .pbw
+>   comment is corrected. The 0.1.1 that never shipped is superseded by 0.2.0.
+> - Still open (LOW): `store_search`'s fallback listing scan has no
+>   candidate-pool cache across calls. Deferred — a correct fix needs a
+>   per-client TTL cache plus a `refresh` arg and `fetched_at` in the return
+>   (TOOL-SURFACE §3), i.e. a tool-surface change, and the path only runs when
+>   the search index is down.
 
 Goal: pebble-mcp covers the **whole lifecycle**, not just the middle. Today it
 can find, download, test, and design. It can't yet *create*, *review*, or

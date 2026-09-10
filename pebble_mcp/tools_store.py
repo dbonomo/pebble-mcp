@@ -360,9 +360,12 @@ def _store_compare(client: StoreClient, app_ids: list[str]) -> dict[str, Any]:
     }
 
 
-# Hard cap on a downloaded .pbw. Real Pebble apps are tiny (a fat multi-platform
-# watchapp is well under a megabyte); 32 MiB is orders of magnitude of headroom
-# while still refusing a hostile/mistaken endpoint that would stream gigabytes
+# Hard cap on a downloaded .pbw. Typical Pebble apps are small — a single-
+# platform watchface is tens of KB — but a fat multi-platform build with
+# bitmap resources for all seven platforms runs to a few MB, so the old
+# "well under a megabyte" rule of thumb was wrong. 32 MiB still leaves an
+# order of magnitude of headroom over the largest real .pbw while refusing a
+# hostile/mistaken endpoint that would stream gigabytes
 # into memory and onto disk. The transport hands us the whole body at once, so
 # this bounds what we *persist* rather than what we buffer — a stricter,
 # streaming limit would require changing the shared transport signature.
@@ -590,8 +593,8 @@ def register(mcp: FastMCP) -> None:
         single basename inside ``dest_dir`` — a hostile ``id``/version cannot
         traverse out. Refuses with a clear error if: the app has no published
         ``.pbw``; ``dest_dir`` exists as a non-directory; the body is empty
-        (0 bytes); or the body exceeds a 32 MiB safety cap (real .pbw files are
-        well under a megabyte). Sends the polite pebble-mcp User-Agent. This
+        (0 bytes); or the body exceeds a 32 MiB safety cap (a real .pbw runs
+        from tens of KB to a few MB). Sends the polite pebble-mcp User-Agent. This
         feeds the install/emulator flow — hand the returned ``path`` to a Tier 3
         install tool.
         """
