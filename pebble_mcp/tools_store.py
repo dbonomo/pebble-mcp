@@ -34,11 +34,29 @@ from pebble_mcp.store import (
 if TYPE_CHECKING:
     from mcp.server.fastmcp import FastMCP
 
-# Client-side search knobs. The live API has no search endpoint (A1 finding),
-# so store_search scans store *listings*. These bound how much we page.
+# store_search accepts every collection type_string plus "any" (both kinds),
+# which is the default: "find me the app called X" should not require the
+# caller to already know whether X is a watchface or a watchapp.
+SEARCH_TYPE_STRINGS = ("any", *COLLECTION_APP_TYPES)
+_SEARCH_MAX_RESULTS = 50
+
+# Fallback (listing-scan) knobs, used only when the store's search index is
+# unreachable. The REST API itself has no text-search route, so this scans
+# store *listings*; these bound how much we page.
 _SEARCH_POOL_SLUGS = ("all", "most-loved")
 _SEARCH_PAGE_SIZE = 50
 _SEARCH_MAX_PAGES = 4  # per pool slug -> at most 200 candidates per pool
+# Which collections a scan walks when the caller didn't narrow the type.
+_SCAN_TYPES_FOR_ANY = ("watchfaces", "watchapps-and-companions")
+
+# Escape hatch printed alongside thin/empty results: every store listing URL
+# ends in the 24-hex id these tools take.
+_BY_ID_HINT = (
+    "Nothing (or not what you wanted)? Every app is reachable by id: a store "
+    "URL like https://apps.repebble.com/2048-touch_6df87b64b7174448a065ef54 "
+    "ends in the 24-hex-character id. Pass that to store_app for full "
+    "metadata or straight to store_download_pbw to fetch the .pbw."
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -186,31 +204,77 @@ def _score(app: App, query: str, tokens: list[str]) -> int:
     return score
 
 
-def _store_search(
+def _search_index(
     client: StoreClient,
     query: str,
     type_string: str,
     hardware: str,
     max_results: int,
 ) -> dict[str, Any]:
-    if type_string not in COLLECTION_APP_TYPES:
-        raise StoreError(
-            f"invalid type_string {type_string!r}; expected one of {COLLECTION_APP_TYPES}"
+    """Real catalog search via the store's hosted search index (preferred path).
+
+    Covers the whole store, not just the collection listings, so long-tail and
+    low-heart apps are findable by name. Ranking is the index's own relevance
+    order; we do not re-sort it.
+    """
+    page = client.search_apps(
+        query,
+        type_string=None if type_string == "any" else type_string,
+        limit=max_results,
+    )
+    results = [_summary(a, hardware) for a in page.apps]
+    out: dict[str, Any] = {
+        "query": query,
+        "type": type_string,
+        "hardware": hardware,
+        "method": "store search index (whole catalog, server-side relevance)",
+        "total_hits": page.total_hits,
+        "returned": len(results),
+        "result_count": len(results),
+        "has_more": page.has_more,
+        "results": results,
+    }
+    if page.has_more:
+        out["more_hint"] = (
+            f"{page.total_hits} apps matched; raise max_results (up to "
+            f"{_SEARCH_MAX_RESULTS}) or use a more specific query."
         )
+    if not results:
+        out["next_step"] = _BY_ID_HINT
+    return out
+
+
+def _search_scan(
+    client: StoreClient,
+    query: str,
+    type_string: str,
+    hardware: str,
+    max_results: int,
+) -> dict[str, Any]:
+    """Fallback: client-side ranking over a bounded scan of store listings.
+
+    Only reached when the search index is unreachable. Coverage is limited to
+    what the ``all``/``most-loved`` collections return, so an app outside
+    those pools is invisible here — hence the by-id escape hatch in the return.
+    """
+    scan_types = (
+        _SCAN_TYPES_FOR_ANY if type_string == "any" else (type_string,)
+    )
 
     # Gather a candidate pool by paging the relevant listings. Dedupe by id;
     # first sighting wins (identical app across pools is the same object).
     pool: dict[str, App] = {}
-    for slug in _SEARCH_POOL_SLUGS:
-        for page_i in range(_SEARCH_MAX_PAGES):
-            offset = page_i * _SEARCH_PAGE_SIZE
-            page = client.get_apps_by_collection(
-                slug, type_string, hardware=hardware, limit=_SEARCH_PAGE_SIZE, offset=offset
-            )
-            for app in page.apps:
-                pool.setdefault(app.id, app)
-            if page.next_page_url is None or not page.apps:
-                break
+    for scan_type in scan_types:
+        for slug in _SEARCH_POOL_SLUGS:
+            for page_i in range(_SEARCH_MAX_PAGES):
+                offset = page_i * _SEARCH_PAGE_SIZE
+                page = client.get_apps_by_collection(
+                    slug, scan_type, hardware=hardware, limit=_SEARCH_PAGE_SIZE, offset=offset
+                )
+                for app in page.apps:
+                    pool.setdefault(app.id, app)
+                if page.next_page_url is None or not page.apps:
+                    break
 
     q = query.strip().lower()
     tokens = [t for t in q.split() if t]
@@ -232,11 +296,37 @@ def _store_search(
         "query": query,
         "type": type_string,
         "hardware": hardware,
-        "method": "client-side listing scan (no server search endpoint)",
+        "method": "client-side listing scan (fallback — search index unreachable)",
         "candidates_scanned": len(pool),
+        "returned": len(results),
         "result_count": len(results),
+        "has_more": False,
         "results": results,
+        "next_step": _BY_ID_HINT,
     }
+
+
+def _store_search(
+    client: StoreClient,
+    query: str,
+    type_string: str,
+    hardware: str,
+    max_results: int,
+) -> dict[str, Any]:
+    """Search the store: index first, bounded listing scan if that's down."""
+    if type_string not in SEARCH_TYPE_STRINGS:
+        raise StoreError(
+            f"invalid type_string {type_string!r}; expected one of {SEARCH_TYPE_STRINGS}"
+        )
+    max_results = max(1, min(int(max_results), _SEARCH_MAX_RESULTS))
+    try:
+        return _search_index(client, query, type_string, hardware, max_results)
+    except StoreError as e:
+        # The index is a third-party host; if it 4xx/5xx/times out we still owe
+        # the caller an answer rather than an exception. Say which path ran.
+        out = _search_scan(client, query, type_string, hardware, max_results)
+        out["index_error"] = f"{type(e).__name__}: {e}"[:300]
+        return out
 
 
 def _store_compare(client: StoreClient, app_ids: list[str]) -> dict[str, Any]:
@@ -379,10 +469,18 @@ def register(mcp: FastMCP) -> None:
     def store_app(app_id: str) -> dict[str, Any]:
         """Full metadata for one appstore app or watchface by its id.
 
+        This is the by-id lookup every other store tool funnels into, and the
+        fastest path when you already know (or can see) the app: a store
+        listing URL ends in the id, e.g.
+        ``https://apps.repebble.com/2048-touch_6df87b64b7174448a065ef54`` ->
+        ``6df87b64b7174448a065ef54``. Ids are 24 hex characters; ``store_search``
+        and every listing tool return them in ``id``.
+
         Returns hearts, author, description, the list of compatible hardware
         platforms (with a ``has_emery`` convenience flag), the latest release
         (version + date + notes), the direct ``.pbw`` download URL, and
-        screenshot/header image URLs.
+        screenshot/header image URLs. Pass the same id to
+        ``store_download_pbw`` to fetch the build.
         """
         return _store_app(client, app_id)
 
@@ -438,26 +536,38 @@ def register(mcp: FastMCP) -> None:
     @mcp.tool()
     def store_search(
         query: str,
-        type_string: str = "watchfaces",
+        type_string: str = "any",
         hardware: str = "emery",
         max_results: int = 20,
     ) -> dict[str, Any]:
-        """Search the store by keyword — CLIENT-SIDE, with real limits.
+        """Search the whole appstore catalog by title/keyword.
 
-        The live appstore API has NO search endpoint, so this does not do a
-        true full-text search. Instead it fetches a bounded candidate pool
-        from the relevant store *listings* (the ``all`` and ``most-loved``
-        collections for ``type_string``, paged up to a few hundred apps) and
-        ranks them by case-insensitive substring/token matches on each app's
-        title, author, and description. Results carry a ``score``.
+        Queries the same hosted search index the official store website uses,
+        so long-tail and low-heart apps are findable by name — searching
+        "2048 touch" returns that app even though it is nowhere near the
+        most-loved listings. Results are compact summaries
+        (id/title/type/author/hearts + a ``compatible`` flag for ``hardware``)
+        in the index's own relevance order, with ``total_hits`` and
+        ``has_more``.
 
-        Consequences to keep in mind:
-        - Coverage is only what those listings return: an obscure app outside
-          the ``all``/``most-loved`` pool can be missed entirely.
-        - It matches on stored listing text, not on-device behavior or tags.
-        - ``type_string`` must be one of ``apps``,
-          ``watchapps-and-companions``, ``faces``, ``watchfaces``.
-        For an exact app you already know, prefer ``store_app`` by id.
+        Args:
+            query: free text; matched against title, author, and listing text.
+            type_string: ``any`` (default, searches both kinds), ``faces`` /
+                ``watchfaces``, or ``apps`` / ``watchapps-and-companions``.
+            hardware: platform the ``compatible`` flag is computed for.
+            max_results: 1–50.
+
+        Sharp edges:
+        - A search hit has no ``.pbw`` URL — call ``store_app(id)`` (or go
+          straight to ``store_download_pbw(id, dest)``) for the download.
+        - ``hardware`` flags compatibility, it does not filter results out.
+        - If the index is unreachable the call still answers, degrading to a
+          bounded client-side scan of the ``all``/``most-loved`` listings;
+          ``method`` always states which path ran, and the scan path adds
+          ``index_error``.
+        - Already know the app? Skip search: every store URL ends in the app's
+          24-hex id (e.g. ``.../2048-touch_6df87b64b7174448a065ef54``), and
+          ``store_app`` / ``store_download_pbw`` take that id directly.
         """
         return _store_search(client, query, type_string, hardware, max_results)
 
@@ -475,7 +585,12 @@ def register(mcp: FastMCP) -> None:
 
     @mcp.tool()
     def store_download_pbw(app_id: str, dest_dir: str) -> dict[str, Any]:
-        """Download an app's latest-release ``.pbw`` to ``dest_dir``.
+        """Download an app's latest-release ``.pbw`` to ``dest_dir`` by app id.
+
+        ``app_id`` is the 24-hex id from ``store_search``/any listing tool, or
+        the trailing segment of a store URL
+        (``https://apps.repebble.com/2048-touch_6df87b64b7174448a065ef54``) —
+        no search call is required if you already have it.
 
         Creates ``dest_dir`` if needed, writes the file, and returns its path
         and byte size (plus the app title and version). The on-disk filename is

@@ -168,7 +168,132 @@ def test_store_category_and_developer_reach_right_endpoints():
 
 
 # --------------------------------------------------------------------------- #
-# store_search — client-side ranking over a synthetic pool
+# store_search — index path (preferred) over a synthetic search response
+# --------------------------------------------------------------------------- #
+SEARCH_PATH = "/1/indexes/*/queries"
+
+
+def _synthetic_search(
+    hits: list[dict], *, nb_hits: int | None = None, page: int = 0, nb_pages: int = 1
+) -> str:
+    """Build a search-index response body wrapping the given app records."""
+    return json.dumps(
+        {
+            "results": [
+                {
+                    "hits": hits,
+                    "nbHits": len(hits) if nb_hits is None else nb_hits,
+                    "page": page,
+                    "nbPages": nb_pages,
+                    "hitsPerPage": len(hits),
+                }
+            ]
+        }
+    )
+
+
+def _index_client(body: str, status: int = 200) -> tuple[StoreClient, FakeTransport]:
+    return client_for({("POST", SEARCH_PATH): (status, body)})
+
+
+def test_search_uses_the_index_and_returns_relevance_order():
+    hits = [
+        _app("touch", "2048 Touch", "vorsk", "", type_="watchapp", hearts=111),
+        _app("other", "2048", "someone", "", type_="watchapp", hearts=3),
+    ]
+    client, transport = _index_client(_synthetic_search(hits, nb_hits=8, nb_pages=2))
+    out = tools_store._store_search(client, "2048 touch", "any", "emery", 20)
+
+    assert [r["id"] for r in out["results"]] == ["touch", "other"]  # index order kept
+    assert out["method"].startswith("store search index")
+    assert out["total_hits"] == 8
+    assert out["returned"] == out["result_count"] == 2
+    assert out["has_more"] is True
+    assert "more_hint" in out
+    assert out["results"][0]["compatible"] is True
+    # One POST to the search endpoint; no collection listing was scanned.
+    assert [(m, p) for m, p, _, _ in transport.calls] == [("POST", SEARCH_PATH)]
+    body = json.loads(transport.calls[0][3])["requests"][0]
+    assert body["query"] == "2048 touch"
+    assert "tagFilters" not in body  # type_string="any" searches both kinds
+
+
+def test_search_type_string_maps_to_an_index_tag_filter():
+    client, transport = _index_client(_synthetic_search([]))
+    tools_store._store_search(client, "x", "watchfaces", "emery", 20)
+    assert json.loads(transport.calls[0][3])["requests"][0]["tagFilters"] == [["watchface"]]
+
+    client, transport = _index_client(_synthetic_search([]))
+    tools_store._store_search(client, "x", "watchapps-and-companions", "emery", 20)
+    assert json.loads(transport.calls[0][3])["requests"][0]["tagFilters"] == [["watchapp"]]
+
+
+def test_search_no_hits_points_at_the_by_id_escape_hatch():
+    client, _ = _index_client(_synthetic_search([]))
+    out = tools_store._store_search(client, "nothing matches this", "any", "emery", 20)
+    assert out["result_count"] == 0
+    assert "store_app" in out["next_step"]
+    assert "24-hex" in out["next_step"]
+
+
+def test_search_clamps_max_results_into_the_documented_range():
+    hits = [_app(f"a{i}", f"App {i}", "X", "") for i in range(3)]
+    client, transport = _index_client(_synthetic_search(hits))
+    tools_store._store_search(client, "app", "any", "emery", 10**9)
+    assert json.loads(transport.calls[0][3])["requests"][0]["hitsPerPage"] == 50
+
+    client, transport = _index_client(_synthetic_search(hits))
+    tools_store._store_search(client, "app", "any", "emery", -5)
+    assert json.loads(transport.calls[0][3])["requests"][0]["hitsPerPage"] == 1
+
+
+def test_search_falls_back_to_a_listing_scan_when_the_index_fails():
+    pool = [_app("t", "Weather Pro", "Alice", "forecast", hearts=1)]
+    client, transport = client_for(
+        {
+            ("POST", SEARCH_PATH): (503, '{"message": "index unavailable"}'),
+            ("GET", "/api/v1/apps/collection/all/watchfaces"): (200, _synthetic_page(pool)),
+            ("GET", "/api/v1/apps/collection/most-loved/watchfaces"): (
+                200,
+                _synthetic_page([]),
+            ),
+        }
+    )
+    out = tools_store._store_search(client, "weather", "watchfaces", "emery", 20)
+
+    assert [r["id"] for r in out["results"]] == ["t"]
+    assert out["method"].startswith("client-side listing scan")
+    assert "index unavailable" in out["index_error"]
+    assert "store_app" in out["next_step"]
+
+
+def test_search_scan_for_any_type_walks_both_listings():
+    face = _app("f", "Weather Face", "X", "d")
+    app = _app("a", "Weather App", "X", "d", type_="watchapp")
+    client, transport = client_for(
+        {
+            ("POST", SEARCH_PATH): (500, '{"message": "boom"}'),
+            ("GET", "/api/v1/apps/collection/all/watchfaces"): (200, _synthetic_page([face])),
+            ("GET", "/api/v1/apps/collection/most-loved/watchfaces"): (
+                200,
+                _synthetic_page([]),
+            ),
+            ("GET", "/api/v1/apps/collection/all/watchapps-and-companions"): (
+                200,
+                _synthetic_page([app]),
+            ),
+            ("GET", "/api/v1/apps/collection/most-loved/watchapps-and-companions"): (
+                200,
+                _synthetic_page([]),
+            ),
+        }
+    )
+    out = tools_store._store_search(client, "weather", "any", "emery", 20)
+    assert {r["id"] for r in out["results"]} == {"f", "a"}
+
+
+# --------------------------------------------------------------------------- #
+# store_search — fallback ranking over a synthetic listing pool
 # --------------------------------------------------------------------------- #
 def _search_client(pool_apps: list[dict]) -> tuple[StoreClient, FakeTransport]:
     # store_search pages "all" then "most-loved"; give "all" the pool and
@@ -194,7 +319,7 @@ def test_search_ranks_title_hit_above_description_hit():
         _app("n", "Battery", "Carol", "battery meter", hearts=99),
     ]
     client, _ = _search_client(pool)
-    out = tools_store._store_search(client, "weather", "watchfaces", "emery", 20)
+    out = tools_store._search_scan(client, "weather", "watchfaces", "emery", 20)
 
     ids = [r["id"] for r in out["results"]]
     assert ids == ["t", "d"]  # title match outranks description match; "n" excluded
@@ -209,14 +334,14 @@ def test_search_ties_break_on_hearts():
         _app("high", "Weather B", "X", "d", hearts=500),
     ]
     client, _ = _search_client(pool)
-    out = tools_store._store_search(client, "weather", "watchfaces", "emery", 20)
+    out = tools_store._search_scan(client, "weather", "watchfaces", "emery", 20)
     assert [r["id"] for r in out["results"]] == ["high", "low"]
 
 
 def test_search_respects_max_results():
     pool = [_app(f"w{i}", f"Weather {i}", "X", "d", hearts=i) for i in range(5)]
     client, _ = _search_client(pool)
-    out = tools_store._store_search(client, "weather", "watchfaces", "emery", 2)
+    out = tools_store._search_scan(client, "weather", "watchfaces", "emery", 2)
     assert out["result_count"] == 2
     assert len(out["results"]) == 2
 
@@ -251,7 +376,7 @@ def test_search_pages_until_no_next_page():
             raise AssertionError(parsed.path)
 
     client = StoreClient(transport=PagingTransport({}))
-    out = tools_store._store_search(client, "weather", "watchfaces", "emery", 20)
+    out = tools_store._search_scan(client, "weather", "watchfaces", "emery", 20)
     assert {r["id"] for r in out["results"]} == {"p1", "p2"}
     assert calls  # silence unused
 
@@ -455,7 +580,7 @@ def test_download_pbw_rejects_oversized_body(tmp_path):
 # --------------------------------------------------------------------------- #
 def test_search_empty_query_returns_no_results():
     client, _ = _search_client([_app("a", "Weather", "X", "d")])
-    out = tools_store._store_search(client, "   ", "watchfaces", "emery", 20)
+    out = tools_store._search_scan(client, "   ", "watchfaces", "emery", 20)
     assert out["result_count"] == 0
     assert out["results"] == []
 
@@ -464,17 +589,17 @@ def test_search_pathological_queries_do_not_crash():
     pool = [_app("a", "Weather Pro", "X", "regex .*+? [chars]")]
     for q in ("a" * 10_000, ".*+?[](){}", "☃️ unicode 作者", "\x00\x07ctl"):
         client, _ = _search_client(pool)
-        out = tools_store._store_search(client, q, "watchfaces", "emery", 20)
+        out = tools_store._search_scan(client, q, "watchfaces", "emery", 20)
         assert "results" in out
 
 
 def test_search_negative_and_huge_max_results():
     pool = [_app(f"w{i}", f"Weather {i}", "X", "d", hearts=i) for i in range(3)]
     client, _ = _search_client(pool)
-    neg = tools_store._store_search(client, "weather", "watchfaces", "emery", -5)
+    neg = tools_store._search_scan(client, "weather", "watchfaces", "emery", -5)
     assert neg["result_count"] == 0
     client, _ = _search_client(pool)
-    huge = tools_store._store_search(client, "weather", "watchfaces", "emery", 10**9)
+    huge = tools_store._search_scan(client, "weather", "watchfaces", "emery", 10**9)
     assert huge["result_count"] == 3  # bounded by the pool, no blow-up
 
 
@@ -486,6 +611,6 @@ def test_search_survives_mixed_string_and_int_hearts_in_pool():
     a["hearts"] = "5"
     b["hearts"] = 5
     client, _ = _search_client([a, b])
-    out = tools_store._store_search(client, "weather", "watchfaces", "emery", 20)
+    out = tools_store._search_scan(client, "weather", "watchfaces", "emery", 20)
     assert {r["id"] for r in out["results"]} == {"a", "b"}
     assert all(isinstance(r["hearts"], int) for r in out["results"])

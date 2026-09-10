@@ -77,7 +77,9 @@ so an agent only ever sees the tools it can actually run.
   publish, timeline pins). Detected by `capabilities()`; opt-in only.
 
 Read-only reference is also exposed as MCP resources: `pebble://colors`,
-`pebble://fonts`, `pebble://platforms`, `pebble://wire-conventions`.
+`pebble://fonts`, `pebble://platforms`, `pebble://wire-conventions`,
+`pebble://touch-interaction` (swipe/tap handling on emery + gabbro, and how
+touch coexists with the buttons).
 
 ### The `capabilities()` tier probe
 

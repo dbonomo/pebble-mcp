@@ -1,14 +1,16 @@
 """Read-only MCP resources: reference data an agent can pull without a tool call.
 
-Registers four ``pebble://`` resources, each returning a JSON-encoded string
+Registers five ``pebble://`` resources, each returning a JSON-encoded string
 with a stable top-level shape:
 
 * ``pebble://platforms`` -- per-platform display specs (from :mod:`platforms`).
 * ``pebble://colors`` -- the 64-color palette table + our house role guidance.
 * ``pebble://fonts`` -- system font keys/sizes/usage, distilled from DESIGN.md.
 * ``pebble://wire-conventions`` -- the reusable delimited wire-string pattern.
+* ``pebble://touch-interaction`` -- swipe/tap handling on touch-capable
+  Pebbles (emery/gabbro), and how touch coexists with the buttons.
 
-All four are pure functions of in-repo data (platforms.py, palette.py,
+All five are pure functions of in-repo data (platforms.py, palette.py,
 DESIGN.md) -- no I/O, no toolchain, always available regardless of capability
 tier.
 """
@@ -246,6 +248,193 @@ def wire_conventions_resource() -> dict[str, object]:
 
 
 # ---------------------------------------------------------------------------
+# pebble://touch-interaction
+# ---------------------------------------------------------------------------
+# Distilled from reading a shipping touch-enabled store app (see the
+# ``credit`` key below) plus the SDK's touch service API. Everything here is
+# written in our own words as house guidance -- pebble-mcp is MIT and does not
+# vendor, quote, or paraphrase-at-the-line-level any GPL-3.0 source.
+def touch_interaction_resource() -> dict[str, object]:
+    """Return the pebble://touch-interaction payload: how to handle swipes and
+    taps on touch-capable Pebbles, and how touch coexists with the buttons.
+
+    Touch hardware exists only on the newer platforms (``emery``,
+    ``gabbro``); every other target is buttons-only, so touch code is always
+    additive and always compiled out elsewhere.
+    """
+    return {
+        "overview": (
+            "The SDK's touch service is raw, not gestural: you subscribe once "
+            "and receive three event kinds -- touchdown, position-update, and "
+            "liftoff -- each carrying an x/y in screen pixels. There is no "
+            "built-in swipe/fling/pinch recognizer and no multi-touch. A "
+            "usable swipe is roughly thirty lines you write yourself, and the "
+            "recommended shape is the liftoff-resolved delta below. Touch is "
+            "an *addition* to the buttons, never a replacement: the same app "
+            "binary runs on button-only hardware, and even on touch hardware "
+            "the buttons stay live."
+        ),
+        "event_model": {
+            "touchdown": (
+                "Finger lands. Record the x/y into two module-static int16 "
+                "fields and set an 'active' flag. Do no work here beyond "
+                "that -- no move is committed on touchdown."
+            ),
+            "position_update": (
+                "Fires repeatedly while the finger moves. IGNORE IT unless "
+                "you are drawing live drag feedback (a tile that follows the "
+                "finger, a scroll offset that tracks it). Handling it when "
+                "you do not need it just burns CPU and redraws; a "
+                "discrete-action UI should let these fall through to a "
+                "default no-op branch."
+            ),
+            "liftoff": (
+                "Finger leaves. This is where the gesture is resolved: "
+                "compute dx/dy against the stored touchdown position, decide "
+                "tap-vs-swipe and direction, clear the active flag, and "
+                "dispatch the action."
+            ),
+        },
+        "swipe_recognition": {
+            "technique": (
+                "Liftoff-resolved delta. dx = liftoff.x - touchdown.x, "
+                "dy = liftoff.y - touchdown.y; take absolute values adx/ady."
+            ),
+            "jitter_threshold_px": 18,
+            "threshold_note": (
+                "If adx and ady are BOTH under the threshold, treat the "
+                "gesture as a tap (or as noise) and commit no swipe. ~18px is "
+                "a hand-tuned value that works well on emery-class screens -- "
+                "it is not derived from a platform constant, so tune it per "
+                "app rather than treating it as an SDK number."
+            ),
+            "direction": (
+                "Dominant-axis wins: if adx > ady the swipe is horizontal "
+                "(dx > 0 -> right, else left), otherwise vertical (dy > 0 -> "
+                "down, else up, since Pebble's y grows downward). A diagonal "
+                "therefore always collapses to one of four directions. No "
+                "trigonometry, no 8-way handling -- for grid/list UIs the "
+                "magnitude comparison is enough."
+            ),
+            "no_velocity_no_timers": (
+                "No debounce timer, no minimum speed, no touchdown->liftoff "
+                "timeout is needed for discrete actions: a slow deliberate "
+                "drag past the threshold and a fast flick mean the same "
+                "thing. Only reach for velocity if the app genuinely needs "
+                "fling/inertia."
+            ),
+            "state_cost": (
+                "The entire recognizer is two int16s plus one bool of "
+                "module-static state. Keep it that small."
+            ),
+            "stale_liftoff_guard": (
+                "Bail out of the liftoff handler when the active flag is "
+                "false. A liftoff can arrive with no matching touchdown -- a "
+                "touch that began before your window was frontmost, or a pair "
+                "split across a subscribe/unsubscribe boundary -- and without "
+                "the guard you compute a delta against stale coordinates and "
+                "fire a phantom swipe."
+            ),
+        },
+        "buttons_and_touch_coexist": {
+            "principle": (
+                "Both input paths are subscribed at the same time on touch "
+                "hardware, and both call the SAME action functions (one "
+                "apply_move()/do_action() per logical action). Never let a "
+                "gesture and a button reach the model through different code "
+                "paths -- that is how the two inputs drift into states the "
+                "other does not understand."
+            ),
+            "mapping_example": (
+                "A 4-direction game: UP/DOWN buttons and vertical swipes hit "
+                "the same two actions; SELECT short-press and a right swipe "
+                "hit a third; BACK short-press and a left swipe hit a fourth. "
+                "Long-press SELECT opens a confirm overlay."
+            ),
+            "modal_gating": (
+                "Gate touch with the same modal/overlay state machine that "
+                "gates buttons, and write that gating out explicitly in BOTH "
+                "handlers rather than sharing one clever helper -- the two "
+                "paths want subtly different behavior (below), and the "
+                "duplication reads clearer than the abstraction."
+            ),
+            "dismiss_vs_commit": (
+                "Useful asymmetry for confirm dialogs and destructive "
+                "actions: ANY touch dismisses/cancels, but only a real "
+                "button press (SELECT) commits. Touch is cheap and easy to "
+                "trigger by accident; a physical click is deliberate."
+            ),
+            "swallow_the_dismissing_gesture": (
+                "When an overlay (an idle 'still there?' prompt, a toast) is "
+                "up, let touchdown dismiss it but do NOT set the active flag. "
+                "Because liftoff no-ops without that flag, the same gesture "
+                "cannot both dismiss the overlay and fire an action "
+                "underneath it. The button equivalent is 'handle the dismiss, "
+                "then return early'."
+            ),
+            "implicit_targets": (
+                "On a terminal screen (game over, error), it is reasonable "
+                "to make the whole surface the restart target: any touch or "
+                "any button starts over, with no drawn affordance."
+            ),
+        },
+        "platform_gating": {
+            "macro": "PBL_TOUCH",
+            "guidance": (
+                "Wrap the handler, the subscribe/unsubscribe helpers, and the "
+                "static state in #ifdef PBL_TOUCH (declaration in the header "
+                "too), so button-only builds (aplite/basalt/chalk/diorite) "
+                "carry zero touch code and zero touch-service overhead. "
+                "Buttons must remain fully sufficient on those platforms -- "
+                "no feature may be touch-only."
+            ),
+            "touch_platforms": ["emery", "gabbro"],
+        },
+        "lifecycle": {
+            "pairing": (
+                "Subscribe right after the window is pushed; unsubscribe in "
+                "deinit, symmetric with window teardown. Unpaired subscribes "
+                "leak events into a torn-down UI."
+            ),
+            "runtime_gate": (
+                "Guard both the subscribe and the unsubscribe on "
+                "touch_service_is_enabled(). Touch-capable hardware does not "
+                "guarantee the service is on -- firmware version or a user "
+                "setting can disable it -- and the sensor draws power while "
+                "enabled, so check the runtime capability instead of "
+                "inferring it from the platform macro."
+            ),
+        },
+        "gotchas": [
+            "BACK long-press exit is handled by the firmware, not the app: "
+            "the OS force-exits while the button is still held, so the app "
+            "never sees the release. Wiring BACK with a plain single-click "
+            "subscription races that exit. Use a multi-click subscription "
+            "(min 1, max 1, ~50ms timeout, last_click_only) so the handler "
+            "fires shortly after release rather than on press.",
+            "Position-update events fire a lot. Subscribing to logic you do "
+            "not need there is the easiest way to make a touch app feel "
+            "sluggish.",
+            "There is no tap-target hit-testing helper: if you draw an "
+            "on-screen button, you compare the event x/y against the layer's "
+            "bounds yourself. A whole-screen swipe surface needs none of "
+            "that -- prefer it when the UI allows.",
+            "Single-point only. Do not design around pinch, two-finger, or "
+            "simultaneous touches.",
+        ],
+        "credit": (
+            "Patterns observed in '2048 Touch' by vorsk/lanrat (store id "
+            "6df87b64b7174448a065ef54), source at "
+            "https://github.com/lanrat/pebble-2048-touch (GPL-3.0). This "
+            "resource is an independent description of the techniques, "
+            "written for pebble-mcp (MIT); no upstream code is reproduced "
+            "here. If you copy implementation from that repository into a "
+            "project, that project takes on GPL-3.0 obligations."
+        ),
+    }
+
+
+# ---------------------------------------------------------------------------
 # Registration
 # ---------------------------------------------------------------------------
 def register(mcp: FastMCP) -> None:
@@ -270,3 +459,9 @@ def register(mcp: FastMCP) -> None:
     def wire_conventions() -> str:
         """The reusable delimited wire-string pattern for a Pebble companion protocol."""
         return json.dumps(wire_conventions_resource(), indent=2)
+
+    @mcp.resource("pebble://touch-interaction")
+    def touch_interaction() -> str:
+        """Swipe/tap handling on touch Pebbles (emery, gabbro) and how touch
+        coexists with the physical buttons."""
+        return json.dumps(touch_interaction_resource(), indent=2)

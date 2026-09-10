@@ -14,10 +14,12 @@ from pathlib import Path
 
 import pytest
 
+from pebble_mcp import store as store_module
 from pebble_mcp.store import (
     COLLECTION_APP_TYPES,
     StoreBadRequestError,
     StoreClient,
+    StoreError,
     StoreNotFoundError,
     StoreRateLimitedError,
     StoreResponseError,
@@ -254,6 +256,81 @@ def test_get_apps_by_collection_not_found():
 
 def test_collection_app_types_matches_documented_values():
     assert COLLECTION_APP_TYPES == ("apps", "watchapps-and-companions", "faces", "watchfaces")
+
+
+# --------------------------------------------------------------------------- #
+# search_apps — the store's hosted title-search index
+# --------------------------------------------------------------------------- #
+SEARCH_PATH = "/1/indexes/*/queries"
+
+
+def test_search_apps_parses_the_recorded_index_response():
+    # Fixture recorded live: query "2048 touch", hitsPerPage=2 (bulky per-hit
+    # asset/highlight blobs the client never reads were trimmed).
+    client, transport = client_for({("POST", SEARCH_PATH): (200, "search_2048_touch.json")})
+    page = client.search_apps("2048 touch", limit=2)
+
+    assert page.query == "2048 touch"
+    assert page.total_hits == 8
+    assert page.page == 0
+    assert page.has_more is True
+    titles = [a.title for a in page.apps]
+    assert titles[0] == "2048 Touch"
+    top = page.apps[0]
+    # Index records parse through the same parse_app() as REST results...
+    assert top.id == "6df87b64b7174448a065ef54"
+    assert top.author == "vorsk"
+    assert top.hearts == 111
+    assert "emery" in top.compatible_platforms
+    # ...but carry no release block, so there is no .pbw URL on a search hit.
+    assert top.pbw_url is None
+
+    method, path, query, body = transport.calls[0]
+    assert (method, path) == ("POST", SEARCH_PATH)
+    assert query["x-algolia-application-id"] == [store_module.SEARCH_APP_ID]
+    request = json.loads(body)["requests"][0]
+    assert request == {
+        "indexName": store_module.SEARCH_INDEX,
+        "query": "2048 touch",
+        "hitsPerPage": 2,
+        "page": 0,
+    }
+
+
+def test_search_apps_type_string_becomes_a_tag_filter():
+    client, transport = client_for({("POST", SEARCH_PATH): (200, "search_2048_touch.json")})
+    client.search_apps("x", type_string="faces")
+    assert json.loads(transport.calls[0][3])["requests"][0]["tagFilters"] == [["watchface"]]
+
+
+def test_search_apps_rejects_an_unknown_type_string_locally():
+    client, transport = client_for({})
+    with pytest.raises(StoreBadRequestError, match="invalid search type_string"):
+        client.search_apps("x", type_string="watchapps")
+    assert transport.calls == []
+
+
+def test_search_apps_clamps_limit_and_page_to_endpoint_bounds():
+    client, transport = client_for({("POST", SEARCH_PATH): (200, "search_2048_touch.json")})
+    client.search_apps("x", limit=10_000, page=-3)
+    request = json.loads(transport.calls[0][3])["requests"][0]
+    assert request["hitsPerPage"] == store_module.SEARCH_MAX_HITS_PER_PAGE
+    assert request["page"] == 0
+
+
+def test_search_apps_rejects_a_body_without_a_results_block():
+    client, _ = client_for({("POST", SEARCH_PATH): (200, '{"hits": []}')})
+    with pytest.raises(StoreResponseError, match="no results block"):
+        client.search_apps("x")
+
+
+def test_search_apps_surfaces_the_index_message_field_as_the_error():
+    # The search host reports failures as {"message": ...}, not {"error": ...}.
+    client, _ = client_for(
+        {("POST", SEARCH_PATH): (403, '{"message": "Invalid Application-ID or API key"}')}
+    )
+    with pytest.raises(StoreError, match="Invalid Application-ID or API key"):
+        client.search_apps("x")
 
 
 # --------------------------------------------------------------------------- #

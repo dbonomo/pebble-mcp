@@ -42,7 +42,8 @@ tools_flow.register(mcp)     # tier 3: flow_run/validate, emu screenshot/input/l
 tools_devloop.register(mcp)  # tier 3: pebble_build/install, emu start/stop
 tools_project.register(mcp)  # phase 4: project_new/info/add_resource/set_meta
 tools_review.register(mcp)   # phase 4: design_review, project_smoke_test
-resources.register(mcp)      # pebble:// colors, fonts, platforms, wire-conventions
+resources.register(mcp)      # pebble:// colors, fonts, platforms,
+                             #            wire-conventions, touch-interaction
 
 
 def main() -> None:

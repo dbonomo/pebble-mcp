@@ -11,6 +11,7 @@ from pebble_mcp.resources import (
     colors_resource,
     fonts_resource,
     register,
+    touch_interaction_resource,
     wire_conventions_resource,
 )
 
@@ -19,6 +20,7 @@ EXPECTED_URIS = {
     "pebble://colors",
     "pebble://fonts",
     "pebble://wire-conventions",
+    "pebble://touch-interaction",
 }
 
 
@@ -28,7 +30,7 @@ def _server() -> FastMCP:
     return mcp
 
 
-async def test_register_exposes_all_four_uris():
+async def test_register_exposes_all_resource_uris():
     mcp = _server()
     resources = await mcp.list_resources()
     uris = {str(r.uri) for r in resources}
@@ -124,3 +126,49 @@ def test_fonts_resource_function_returns_dict():
 def test_wire_conventions_resource_function_returns_dict():
     data = wire_conventions_resource()
     assert "delimiters" in data
+
+
+async def test_touch_interaction_resource_shape():
+    mcp = _server()
+    data = await _read(mcp, "pebble://touch-interaction")
+    expected_keys = {
+        "overview",
+        "event_model",
+        "swipe_recognition",
+        "buttons_and_touch_coexist",
+        "platform_gating",
+        "lifecycle",
+        "gotchas",
+        "credit",
+    }
+    assert expected_keys <= set(data.keys())
+    assert set(data["event_model"]) == {"touchdown", "position_update", "liftoff"}
+    assert data["swipe_recognition"]["jitter_threshold_px"] == 18
+    assert data["platform_gating"]["macro"] == "PBL_TOUCH"
+    assert data["platform_gating"]["touch_platforms"] == ["emery", "gabbro"]
+    assert isinstance(data["gotchas"], list) and data["gotchas"]
+
+
+def test_touch_interaction_covers_the_named_techniques():
+    data = touch_interaction_resource()
+    blob = json.dumps(data).lower()
+    for topic in (
+        "liftoff",
+        "touchdown",
+        "dominant-axis",
+        "touch_service_is_enabled",
+        "multi-click",
+        "unsubscribe",
+    ):
+        assert topic in blob, topic
+    # BACK's firmware exit race is called out explicitly.
+    assert any("back" in g.lower() and "firmware" in g.lower() for g in data["gotchas"])
+
+
+def test_touch_interaction_credits_upstream_and_flags_the_gpl():
+    # pebble-mcp is MIT; the resource describes patterns and must credit the
+    # GPL-3.0 app they were observed in rather than carrying its code.
+    credit = touch_interaction_resource()["credit"]
+    assert "github.com/lanrat/pebble-2048-touch" in credit
+    assert "GPL-3.0" in credit
+    assert "6df87b64b7174448a065ef54" in credit

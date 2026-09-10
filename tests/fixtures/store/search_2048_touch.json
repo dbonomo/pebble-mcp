@@ -1,0 +1,257 @@
+{
+ "results": [
+  {
+   "hits": [
+    {
+     "_tags": [
+      "watchapp",
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite",
+      "emery",
+      "flint",
+      "gabbro",
+      "android",
+      "ios"
+     ],
+     "id": "6df87b64b7174448a065ef54",
+     "title": "2048 Touch",
+     "author": "vorsk",
+     "description": "Play the classic 2048 sliding-tile puzzle on your Pebble. Combine matching numbered tiles to add them together and work your way up to the 2048 tile \u2014 and beyond.\r\n\r\nSwipe to move on touch-capable Pebbles, or use the physical buttons on every other model. Your board, score, and high score are saved automatically, so you can put the watch down and pick the game back up anytime. Long-press SELECT to start a new game, long-press BACK to exit.\r\n\r\nSupports Pebble Classic, Pebble Time, Pebble Time Round, Pebble 2, Pebble Time 2, Pebble 2 Duo, and Core Devices Pebble.",
+     "type": "watchapp",
+     "category": "Games",
+     "category_id": "5261a8fb3b773043d5000012",
+     "category_color": "b57ad3",
+     "created_at": "2026-05-14T05:52:14.929",
+     "published_date": null,
+     "hearts": 111,
+     "developer_id": "5494f31f210576e99c00005a",
+     "uuid": "ee445bf9-8fc5-4d97-9295-bc19216fba4e",
+     "visible": true,
+     "compatibility": {
+      "aplite": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "basalt": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "chalk": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "diorite": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "emery": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "flint": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "gabbro": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "android": {
+       "supported": true
+      },
+      "ios": {
+       "min_js_version": 1,
+       "supported": true
+      }
+     },
+     "icon_image": "https://assets.repebble.com/icons/6df87b64b7174448a065ef54/small/69fa27d0-00f6-4ed4-b6a0-b975642f691d.png",
+     "list_image": "https://assets.repebble.com/icons/6df87b64b7174448a065ef54/large/0504a472-ffb2-4860-ad90-ab323c885508.png",
+     "screenshot_images": [
+      "https://assets.repebble.com/screenshots/6df87b64b7174448a065ef54/diorite/0a1241cb-4b2f-4310-aca2-63ffe903a2e9.png",
+      "https://assets.repebble.com/screenshots/6df87b64b7174448a065ef54/diorite/36c822d6-128a-46bd-a4cf-d5392e35ef3b.gif"
+     ],
+     "asset_collections": [
+      {
+       "description": "",
+       "hardware_platform": "diorite",
+       "screenshots": [
+        "https://assets.repebble.com/screenshots/6df87b64b7174448a065ef54/diorite/0a1241cb-4b2f-4310-aca2-63ffe903a2e9.png"
+       ]
+      }
+     ],
+     "source": "https://github.com/lanrat/pebble-2048-touch",
+     "website": "https://lanrat.com/projects/2048-touch-for-pebble/",
+     "companions": "00",
+     "collections": [],
+     "version": "1.2.0",
+     "js_versions": [
+      "-1",
+      "-1",
+      "-1"
+     ],
+     "objectID": "6df87b64b7174448a065ef54"
+    },
+    {
+     "_tags": [
+      "watchapp",
+      "emery",
+      "gabbro",
+      "android",
+      "ios"
+     ],
+     "id": "dd7aa57ed1af4d2ea254d422",
+     "title": "Test Touch Sensor",
+     "author": "YKM13",
+     "description": "An app that simply displays the coordinates of your touch in real time.\r\nIt might be useful when you feel like your touch is slightly off!",
+     "type": "watchapp",
+     "category": "Tools & Utilities",
+     "category_id": "5261a8fb3b773043d500000f",
+     "category_color": "fdbf37",
+     "created_at": "2026-08-16T16:23:28.931",
+     "published_date": null,
+     "hearts": 2,
+     "developer_id": "acc51831febaf3d423f218df",
+     "uuid": "f7e2b684-6c9f-4848-a8c7-0d2424f664fe",
+     "visible": true,
+     "compatibility": {
+      "aplite": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": false,
+       "has_binary": false
+      },
+      "basalt": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": false,
+       "has_binary": false
+      },
+      "chalk": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": false,
+       "has_binary": false
+      },
+      "diorite": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": false,
+       "has_binary": false
+      },
+      "emery": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "flint": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": false,
+       "has_binary": false
+      },
+      "gabbro": {
+       "firmware": {
+        "major": 3
+       },
+       "supported": true,
+       "has_binary": true
+      },
+      "android": {
+       "supported": true
+      },
+      "ios": {
+       "min_js_version": 1,
+       "supported": true
+      }
+     },
+     "icon_image": "https://assets.repebble.com/icons/dd7aa57ed1af4d2ea254d422/small/cb35286f-f1b0-4217-ab57-762a8c075204.png",
+     "list_image": "https://assets.repebble.com/icons/dd7aa57ed1af4d2ea254d422/large/1381ab56-a02c-497b-b521-6a5732fff44c.png",
+     "screenshot_images": [
+      "https://assets.repebble.com/screenshots/dd7aa57ed1af4d2ea254d422/emery/55714dcc-8c29-4c45-a6b5-eb809862d3ad.png",
+      "https://assets.repebble.com/screenshots/dd7aa57ed1af4d2ea254d422/emery/e57d547f-1aaa-4d6c-be16-91ef03b425d6.gif"
+     ],
+     "asset_collections": [
+      {
+       "description": "An app that simply displays the coordinates of your touch in real time.\r\nIt might be useful when you feel like your touch is slightly off!",
+       "hardware_platform": "gabbro",
+       "screenshots": [
+        "https://assets.repebble.com/screenshots/dd7aa57ed1af4d2ea254d422/gabbro/fdc9e89f-2048-4422-8462-1ec2be64efcd.png"
+       ]
+      }
+     ],
+     "source": null,
+     "website": null,
+     "companions": "00",
+     "collections": [],
+     "version": "1.0.0",
+     "release_notes": null,
+     "js_versions": [
+      "-1",
+      "-1",
+      "-1"
+     ],
+     "objectID": "dd7aa57ed1af4d2ea254d422"
+    }
+   ],
+   "nbHits": 8,
+   "page": 0,
+   "nbPages": 4,
+   "hitsPerPage": 2,
+   "exhaustiveNbHits": true,
+   "exhaustiveTypo": true,
+   "exhaustive": {
+    "nbHits": true,
+    "typo": true
+   },
+   "query": "2048 touch",
+   "params": "query=2048+touch&hitsPerPage=2&page=0",
+   "index": "apps",
+   "renderingContent": {},
+   "processingTimeMS": 3,
+   "processingTimingsMS": {
+    "_request": {
+     "roundTrip": 49
+    },
+    "fetch": {
+     "query": 1,
+     "total": 2
+    },
+    "getIdx": {
+     "total": 1
+    },
+    "total": 3
+   },
+   "serverTimeMS": 5
+  }
+ ]
+}

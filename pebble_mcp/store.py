@@ -39,6 +39,42 @@ DEFAULT_BASE_URL = "https://appstore-api.repebble.com"
 USER_AGENT = "pebble-mcp/0.1 (+https://github.com/pebble-dev; appstore client)"
 DEFAULT_TIMEOUT = 15.0
 
+# --------------------------------------------------------------------------- #
+# Title search
+# --------------------------------------------------------------------------- #
+# The appstore REST API (appstore-api.repebble.com) has no text-search route --
+# every /api/v1/apps/search-ish path returns the store front-end's 404 page.
+# The *store website* (apps.repebble.com/search) instead queries a hosted
+# Algolia index directly from the browser, with a public search-only key baked
+# into its JavaScript bundle; that is the only real title search the ecosystem
+# exposes today, so we use the same public endpoint the official web client
+# does. Confirmed live: a query for "2048 touch" returns store id
+# 6df87b64b7174448a065ef54 as the top hit -- an app that is invisible to a scan
+# of the all/most-loved collections.
+#
+# The index records are close to the REST API's app shape (id/title/author/
+# type/hearts/compatibility/uuid/source/website/version), so parse_app() reads
+# them directly. They do NOT carry latest_release, so a search hit has no .pbw
+# URL -- follow up with get_app(id) for that.
+#
+# Keys are public, client-side, read-only credentials (the same pair any
+# visitor to the store site receives); they are not secrets. If Rebble rotates
+# them the search path fails cleanly and callers fall back to a listing scan.
+DEFAULT_SEARCH_URL = "https://gm3s9tryo4-dsn.algolia.net/1/indexes/*/queries"
+SEARCH_APP_ID = "GM3S9TRYO4"
+SEARCH_API_KEY = "0b83b4f8e4e8e9793d2f1f93c21894aa"  # search-only, public
+SEARCH_INDEX = "apps"
+SEARCH_MAX_HITS_PER_PAGE = 50
+
+# Map a collection ``type_string`` onto the index's app-kind tag. ``None``
+# (search everything) is the useful default for "find me this app by name".
+SEARCH_TAG_BY_TYPE: dict[str, str] = {
+    "faces": "watchface",
+    "watchfaces": "watchface",
+    "apps": "watchapp",
+    "watchapps-and-companions": "watchapp",
+}
+
 # The app-type "typeString" segment used by the collection/home endpoints.
 # The live API only accepts these four values (confirmed against a running
 # instance); "watchapps" (plural, unqualified) 400s with "Invalid app type".
@@ -140,6 +176,29 @@ class Page:
     limit: int
     offset: int
     next_page_url: str | None
+
+
+@dataclass(frozen=True)
+class SearchPage:
+    """One page of title-search hits from the store's search index.
+
+    ``apps`` are parsed with the same :func:`parse_app` as REST results, but
+    index records carry no ``latest_release`` -- ``App.pbw_url`` is therefore
+    ``None`` on a search hit; call :meth:`StoreClient.get_app` for the
+    download URL.
+    """
+
+    apps: list[App]
+    query: str
+    page: int
+    pages: int
+    total_hits: int
+    hits_per_page: int
+
+    @property
+    def has_more(self) -> bool:
+        """True when further pages of hits exist beyond this one."""
+        return self.page + 1 < self.pages
 
 
 @dataclass(frozen=True)
@@ -346,6 +405,43 @@ def _parse_page(data: dict[str, Any]) -> Page:
     )
 
 
+def _parse_search(data: Any, query: str) -> SearchPage:
+    """Parse the search index's multi-query response into a :class:`SearchPage`.
+
+    Shape is ``{"results": [{"hits": [...], "nbHits": n, "page": p,
+    "nbPages": q, "hitsPerPage": h}]}``; we always send exactly one request,
+    so we read ``results[0]``. As with every other parser here, a surprising
+    body raises :class:`StoreResponseError` rather than an AttributeError.
+    """
+    if not isinstance(data, dict):
+        raise StoreResponseError(
+            f"store search returned a malformed response (expected a JSON object, "
+            f"got {type(data).__name__}); retry, and if it persists fall back to "
+            "browsing a collection or looking the app up by id"
+        )
+    results = data.get("results")
+    if not isinstance(results, list) or not results or not isinstance(results[0], dict):
+        raise StoreResponseError(
+            "store search returned no results block; retry, and if it persists "
+            "fall back to browsing a collection or looking the app up by id"
+        )
+    result = results[0]
+    raw_hits = result.get("hits")
+    apps = [
+        parse_app(h)
+        for h in (raw_hits if isinstance(raw_hits, list) else [])
+        if isinstance(h, dict)
+    ]
+    return SearchPage(
+        apps=apps,
+        query=query,
+        page=_coerce_int(result.get("page")),
+        pages=_coerce_int(result.get("nbPages"), default=1),
+        total_hits=_coerce_int(result.get("nbHits"), default=len(apps)),
+        hits_per_page=_coerce_int(result.get("hitsPerPage"), default=len(apps)),
+    )
+
+
 def _parse_home(data: dict[str, Any]) -> HomeRows:
     if not isinstance(data, dict):
         raise StoreResponseError(
@@ -440,18 +536,29 @@ class StoreClient:
         self,
         base_url: str = DEFAULT_BASE_URL,
         *,
+        search_url: str = DEFAULT_SEARCH_URL,
         timeout: float = DEFAULT_TIMEOUT,
         transport: Transport = urllib_transport,
     ) -> None:
         self.base_url = base_url.rstrip("/")
+        self.search_url = search_url
         self.timeout = timeout
         self._transport = transport
 
     # -- low-level request/response plumbing -------------------------------- #
     def _request(
-        self, method: str, path: str, *, params: dict[str, Any] | None = None, json_body: Any = None
+        self,
+        method: str,
+        path: str,
+        *,
+        params: dict[str, Any] | None = None,
+        json_body: Any = None,
+        absolute_url: str | None = None,
     ) -> Any:
-        url = self.base_url + path
+        # ``absolute_url`` escapes ``base_url`` for the one endpoint that lives
+        # on a different host (the search index); ``path`` is still used for
+        # error messages so failures name the operation, not the vendor URL.
+        url = absolute_url if absolute_url is not None else self.base_url + path
         if params:
             clean = {k: v for k, v in params.items() if v is not None}
             if clean:
@@ -505,6 +612,10 @@ class StoreClient:
             return None
         if isinstance(body, dict) and isinstance(body.get("error"), str):
             return body["error"]
+        # The search index reports failures as {"message": "...", "status": n}
+        # rather than {"error": ...}; surface those too.
+        if isinstance(body, dict) and isinstance(body.get("message"), str):
+            return body["message"]
         return None
 
     # -- public read endpoints ------------------------------------------------ #
@@ -524,6 +635,57 @@ class StoreClient:
         if not page.apps:
             raise StoreNotFoundError(f"app {app_id!r} not found")
         return page.apps[0]
+
+    def search_apps(
+        self,
+        query: str,
+        *,
+        type_string: str | None = None,
+        limit: int = 20,
+        page: int = 0,
+    ) -> SearchPage:
+        """Title/keyword search against the store's hosted search index.
+
+        This is a *real* server-side search over the whole catalog -- unlike
+        a client-side scan of the ``all``/``most-loved`` collections, it finds
+        low-heart and long-tail apps. See the module-level notes on
+        :data:`DEFAULT_SEARCH_URL` for why this endpoint (and not the REST
+        API) is what the official store website itself uses.
+
+        ``type_string`` accepts the same values as the collection endpoints
+        and filters to watchfaces or watchapps; ``None`` (the default)
+        searches both. Hits carry no ``latest_release`` -- call
+        :meth:`get_app` for a download URL.
+        """
+        tag: str | None = None
+        if type_string is not None:
+            tag = SEARCH_TAG_BY_TYPE.get(type_string)
+            if tag is None:
+                raise StoreBadRequestError(
+                    f"invalid search type_string {type_string!r}; expected one of "
+                    f"{tuple(SEARCH_TAG_BY_TYPE)} or None to search both"
+                )
+        request: dict[str, Any] = {
+            "indexName": SEARCH_INDEX,
+            "query": query,
+            "hitsPerPage": max(1, min(int(limit), SEARCH_MAX_HITS_PER_PAGE)),
+            "page": max(0, int(page)),
+        }
+        if tag is not None:
+            request["tagFilters"] = [[tag]]
+        url = self.search_url + "?" + urllib.parse.urlencode(
+            {
+                "x-algolia-api-key": SEARCH_API_KEY,
+                "x-algolia-application-id": SEARCH_APP_ID,
+            }
+        )
+        data = self._request(
+            "POST",
+            "/store-search",
+            absolute_url=url,
+            json_body={"requests": [request]},
+        )
+        return _parse_search(data, query)
 
     def get_apps_bulk(self, app_ids: list[str]) -> BulkResult:
         """``POST /api/v1/apps/bulk`` — fetch many apps by id in one call.
