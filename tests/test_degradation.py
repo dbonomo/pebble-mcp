@@ -186,10 +186,7 @@ async def test_stdio_initialize_and_list_tools_without_pillow():
     (``sys.modules['PIL'] = None``) before importing the server — the same
     end-state as a host that never installed Pillow.
     """
-    bootstrap = (
-        "import sys; sys.modules['PIL'] = None; "
-        "from pebble_mcp.server import main; main()"
-    )
+    bootstrap = "import sys; sys.modules['PIL'] = None; from pebble_mcp.server import main; main()"
     params = StdioServerParameters(command=sys.executable, args=["-c", bootstrap])
     async with stdio_client(params) as (read, write):
         async with ClientSession(read, write) as session:

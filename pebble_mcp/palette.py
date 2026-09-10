@@ -371,8 +371,7 @@ def swatch(
         )
     if labels is not None and len(labels) != len(colors):
         raise ValueError(
-            f"labels must match colors in length: got {len(labels)} labels for "
-            f"{len(colors)} colors"
+            f"labels must match colors in length: got {len(labels)} labels for {len(colors)} colors"
         )
 
     rgbs = [parse_color(c) for c in colors]
@@ -411,16 +410,16 @@ def swatch(
         draw.rectangle([x0, y0, x1 - 1, yb - 1], fill=rgb)
 
         # Caption text in the more-legible of black/white over the block color.
-        text_color = (0, 0, 0) if contrast_ratio(rgb, (0, 0, 0)) >= contrast_ratio(
-            rgb, (255, 255, 255)
-        ) else (255, 255, 255)
+        text_color = (
+            (0, 0, 0)
+            if contrast_ratio(rgb, (0, 0, 0)) >= contrast_ratio(rgb, (255, 255, 255))
+            else (255, 255, 255)
+        )
         _centered_text(draw, cap, x0, y0, cell_w * scale, block_h * scale, font, text_color)
 
         # Hex caption below the block, always black on the white margin.
         hexcap = "#" + rgb_to_hex(rgb)
-        _centered_text(
-            draw, hexcap, x0, yb, cell_w * scale, caption_h * scale, font, (30, 30, 30)
-        )
+        _centered_text(draw, hexcap, x0, yb, cell_w * scale, caption_h * scale, font, (30, 30, 30))
 
     buf = io.BytesIO()
     img.save(buf, format="PNG")

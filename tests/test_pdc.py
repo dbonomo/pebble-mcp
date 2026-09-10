@@ -43,8 +43,7 @@ def test_valid_rect_svg_converts_to_pdc():
 
 def test_valid_svg_with_circle_and_polygon_multiple_commands():
     svg = _svg(
-        '<circle cx="4" cy="4" r="2" fill="#00AAFF"/>'
-        '<polygon points="0,0 8,0 4,8" fill="#00FF00"/>'
+        '<circle cx="4" cy="4" r="2" fill="#00AAFF"/><polygon points="0,0 8,0 4,8" fill="#00FF00"/>'
     )
     result = pdc_convert(svg)
     assert result.valid is True
@@ -171,12 +170,15 @@ def test_odd_coordinate_warnings_are_bounded():
     assert 0 < len(result.warnings) <= 8
 
 
-@pytest.mark.parametrize("tag_svg", [
-    '<line x1="0" y1="0" x2="4" y2="4" stroke="#000" stroke-width="1"/>',
-    '<polyline points="0,0 4,0 4,4" stroke="#000" stroke-width="1"/>',
-    '<polygon points="0,0 4,0 4,4" fill="#000"/>',
-    '<path d="M0,0 L4,0 L4,4 Z" fill="#000"/>',
-])
+@pytest.mark.parametrize(
+    "tag_svg",
+    [
+        '<line x1="0" y1="0" x2="4" y2="4" stroke="#000" stroke-width="1"/>',
+        '<polyline points="0,0 4,0 4,4" stroke="#000" stroke-width="1"/>',
+        '<polygon points="0,0 4,0 4,4" fill="#000"/>',
+        '<path d="M0,0 L4,0 L4,4 Z" fill="#000"/>',
+    ],
+)
 def test_all_supported_element_kinds_convert_cleanly(tag_svg):
     svg = _svg(tag_svg)
     result = pdc_convert(svg)
@@ -193,16 +195,18 @@ def test_all_supported_element_kinds_convert_cleanly(tag_svg):
 @pytest.mark.parametrize(
     "vb",
     [
-        "0 0 1e20 10",       # width would overflow the int16 header field
-        "0 0 NaN 10",        # non-finite width
+        "0 0 1e20 10",  # width would overflow the int16 header field
+        "0 0 NaN 10",  # non-finite width
         "0 0 Infinity 10",
-        "0 0 1e400 10",      # parses to inf
+        "0 0 1e400 10",  # parses to inf
         "0 0 10 -Infinity",  # non-finite height
     ],
 )
 def test_out_of_range_viewbox_dimension_is_violation_not_crash(vb):
-    svg = f'<svg {SVG_NS} width="10" height="10" viewBox="{vb}">' \
-          '<rect x="0" y="0" width="4" height="4" fill="#000"/></svg>'
+    svg = (
+        f'<svg {SVG_NS} width="10" height="10" viewBox="{vb}">'
+        '<rect x="0" y="0" width="4" height="4" fill="#000"/></svg>'
+    )
     result = pdc_convert(svg)  # must not raise struct.error / ValueError
     assert result.valid is False
     assert result.pdc_bytes is None
@@ -211,8 +215,10 @@ def test_out_of_range_viewbox_dimension_is_violation_not_crash(vb):
 
 def test_garbage_viewbox_does_not_crash():
     # A non-numeric viewBox token must not raise out of _get_size.
-    svg = f'<svg {SVG_NS} width="10" height="10" viewBox="0 0 abc 10">' \
-          '<rect x="0" y="0" width="4" height="4" fill="#000"/></svg>'
+    svg = (
+        f'<svg {SVG_NS} width="10" height="10" viewBox="0 0 abc 10">'
+        '<rect x="0" y="0" width="4" height="4" fill="#000"/></svg>'
+    )
     result = pdc_convert(svg)  # must not raise
     assert result is not None
 
@@ -286,8 +292,7 @@ def test_billion_laughs_does_not_hang_or_oom():
     # normal result (here: an "undefined entity" parse error surfaced as a
     # violation) instead of consuming unbounded CPU/memory.
     entities = "\n".join(
-        f'<!ENTITY a{i} "{("&a" + str(i - 1) + ";") * 10 if i else "dos"}">'
-        for i in range(12)
+        f'<!ENTITY a{i} "{("&a" + str(i - 1) + ";") * 10 if i else "dos"}">' for i in range(12)
     )
     svg = (
         f'<?xml version="1.0"?>\n<!DOCTYPE svg [\n{entities}\n]>\n'

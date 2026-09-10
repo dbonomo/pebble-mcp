@@ -383,13 +383,15 @@ def _scan_element(
         if tag in _EXPLICITLY_UNSUPPORTED:
             violations.append(f"<{tag}>: {_EXPLICITLY_UNSUPPORTED[tag]}")
         elif tag not in _SUPPORTED_ELEMENTS and tag not in _CONTAINER_ELEMENTS:
-            violations.append(f"<{tag}>: unsupported element (svg2pdc supports g/layer/path/rect/"
-                               "polyline/polygon/line/circle only)")
+            violations.append(
+                f"<{tag}>: unsupported element (svg2pdc supports g/layer/path/rect/"
+                "polyline/polygon/line/circle only)"
+            )
 
         transform = el.get("transform")
         if transform and not _TRANSLATE_RE.fullmatch(transform.strip()):
             violations.append(
-                f"<{tag} transform=\"{transform}\">: only translate(x, y) transforms are supported"
+                f'<{tag} transform="{transform}">: only translate(x, y) transforms are supported'
             )
 
         for attr in ("fill", "stroke"):
@@ -405,7 +407,7 @@ def _scan_element(
             if d and any(c in _CURVE_COMMANDS for c in d):
                 curve_chars = sorted({c for c in d if c in _CURVE_COMMANDS})
                 violations.append(
-                    f"<path d=\"...\">: curve command(s) {curve_chars} not supported -- "
+                    f'<path d="...">: curve command(s) {curve_chars} not supported -- '
                     "flatten to line segments (M/L/H/V/Z only) before converting"
                 )
 
@@ -443,8 +445,12 @@ def _dimension_violations(min_x: float, min_y: float, w: float, h: float) -> lis
     """Reject non-finite or out-of-header-range canvas dimensions before we try
     to pack them into the signed-int16 file header."""
     issues: list[str] = []
-    for label, val in (("viewBox min-x", min_x), ("viewBox min-y", min_y),
-                       ("width", w), ("height", h)):
+    for label, val in (
+        ("viewBox min-x", min_x),
+        ("viewBox min-y", min_y),
+        ("width", w),
+        ("height", h),
+    ):
         if not math.isfinite(val):
             issues.append(f"{label} is not a finite number ({val})")
     for label, val in (("width", w), ("height", h)):
@@ -611,8 +617,13 @@ def pdc_convert(svg_text: str) -> PdcResult:
     violations = validate_svg(svg_text)
     if violations:
         return PdcResult(
-            valid=False, pdc_bytes=None, width=None, height=None, num_commands=None,
-            violations=violations, warnings=[],
+            valid=False,
+            pdc_bytes=None,
+            width=None,
+            height=None,
+            num_commands=None,
+            violations=violations,
+            warnings=[],
         )
 
     root = ET.fromstring(svg_text)
@@ -621,8 +632,13 @@ def pdc_convert(svg_text: str) -> PdcResult:
     dim_violations = _dimension_violations(min_x, min_y, w, h)
     if dim_violations:
         return PdcResult(
-            valid=False, pdc_bytes=None, width=None, height=None, num_commands=None,
-            violations=dim_violations, warnings=[],
+            valid=False,
+            pdc_bytes=None,
+            width=None,
+            height=None,
+            num_commands=None,
+            violations=dim_violations,
+            warnings=[],
         )
 
     translate = (-min_x, -min_y)
@@ -635,8 +651,13 @@ def pdc_convert(svg_text: str) -> PdcResult:
         # truncated/wrong PDC. Consistent with the "structured violations, never
         # a broken file" contract that governs the pre-conversion scan.
         return PdcResult(
-            valid=False, pdc_bytes=None, width=None, height=None, num_commands=None,
-            violations=coord_violations, warnings=warnings,
+            valid=False,
+            pdc_bytes=None,
+            width=None,
+            height=None,
+            num_commands=None,
+            violations=coord_violations,
+            warnings=warnings,
         )
 
     width, height = round(w), round(h)

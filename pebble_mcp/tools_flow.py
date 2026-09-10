@@ -133,13 +133,10 @@ def run_flow_tool(
         out_dir = tempfile.mkdtemp(prefix="pebble-flow-")
 
     try:
-        result = run_flow(
-            flow, out_dir, repo_root=repo_root(), runner=runner, sleep=sleep
-        )
+        result = run_flow(flow, out_dir, repo_root=repo_root(), runner=runner, sleep=sleep)
     except Exception as e:  # Wedged, or any driver failure -> actionable tool error
         raise ToolError(
-            f"flow run failed: {e}. The emulator may be wedged; try emu_stop("
-            "wipe=True) and re-run."
+            f"flow run failed: {e}. The emulator may be wedged; try emu_stop(wipe=True) and re-run."
         ) from e
 
     metadata: dict[str, Any] = {
@@ -206,12 +203,7 @@ def screenshot_tool(
         base += ".png"
     dest = os.path.join(tempfile.mkdtemp(prefix="pebble-shot-"), os.path.basename(base))
     rc, out = runner(["pebble", "screenshot", "--no-open", dest], None, 90)
-    if (
-        rc != 0
-        or not os.path.exists(dest)
-        or os.path.getsize(dest) == 0
-        or not _is_png(dest)
-    ):
+    if rc != 0 or not os.path.exists(dest) or os.path.getsize(dest) == 0 or not _is_png(dest):
         hint = (
             " The emulator looks wedged; try emu_stop(wipe=True) then reinstall."
             if looks_wedged(out)
@@ -236,9 +228,7 @@ def input_tool(
     _require_emulator()
 
     if action not in VALID_ACTIONS:
-        raise ToolError(
-            f"invalid action {action!r}; expected one of {VALID_ACTIONS}"
-        )
+        raise ToolError(f"invalid action {action!r}; expected one of {VALID_ACTIONS}")
 
     if action == "tap":
         if button is not None or duration_ms is not None:
@@ -246,9 +236,7 @@ def input_tool(
         cmd = ["pebble", "emu-tap"]
     else:
         if button not in VALID_BUTTONS:
-            raise ToolError(
-                f"invalid button {button!r}; expected one of {VALID_BUTTONS}"
-            )
+            raise ToolError(f"invalid button {button!r}; expected one of {VALID_BUTTONS}")
         cmd = ["pebble", "emu-button", "click", button]
         if action == "longpress":
             if duration_ms is None:
@@ -256,9 +244,7 @@ def input_tool(
             if duration_ms <= 0:
                 raise ToolError(f"duration_ms must be positive, got {duration_ms}")
             if duration_ms > MAX_DURATION_MS:
-                raise ToolError(
-                    f"duration_ms {duration_ms} exceeds the {MAX_DURATION_MS} ms cap"
-                )
+                raise ToolError(f"duration_ms {duration_ms} exceeds the {MAX_DURATION_MS} ms cap")
             cmd += ["--duration", str(duration_ms)]
         elif duration_ms is not None:
             raise ToolError("'press' does not take duration_ms; use 'longpress'")

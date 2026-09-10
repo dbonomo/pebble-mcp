@@ -471,9 +471,7 @@ def test_parse_app_tolerates_wrong_typed_containers():
 def test_parse_page_rejects_top_level_array():
     # A bare JSON array at the top level (not the documented {"data": [...]}) must
     # surface as a typed StoreResponseError, never a raw AttributeError.
-    client, _ = client_for(
-        {("GET", "/api/v1/apps/category/faces"): (200, "[1, 2, 3]")}
-    )
+    client, _ = client_for({("GET", "/api/v1/apps/category/faces"): (200, "[1, 2, 3]")})
     # Message should make clear this is a server-side response problem (not a
     # bad request the caller can fix by changing arguments) and suggest retrying.
     with pytest.raises(StoreResponseError, match="server-side response issue"):
@@ -487,15 +485,13 @@ def test_get_apps_bulk_rejects_non_object_body():
 
 
 def test_get_home_rejects_non_object_body():
-    client, _ = client_for({("GET", "/api/v1/home/apps"): (200, "\"just a string\"")})
+    client, _ = client_for({("GET", "/api/v1/home/apps"): (200, '"just a string"')})
     with pytest.raises(StoreResponseError, match="server-side response issue"):
         client.get_home("apps")
 
 
 def test_parse_app_survives_control_chars_and_unicode_in_text():
-    app = parse_app(
-        {"id": "x", "title": "W​eather\x07퟿", "author": "作者"}
-    )
+    app = parse_app({"id": "x", "title": "W​eather\x07퟿", "author": "作者"})
     # stored verbatim, and still safely lower()-able (used by search scoring)
     assert isinstance(app.title, str)
     assert app.title.lower() == app.title.lower()
@@ -509,9 +505,7 @@ def test_negative_and_absurd_paging_params_pass_through_to_api():
     client, transport = client_for(
         {("GET", "/api/v1/apps/category/faces"): (200, "category_faces.json")}
     )
-    client.get_apps_by_category(
-        "faces", hardware="nonsense$$", limit=-5, offset=10**9
-    )
+    client.get_apps_by_category("faces", hardware="nonsense$$", limit=-5, offset=10**9)
     _, _, query, _ = transport.calls[0]
     # We deliberately do NOT second-guess API-owned params; they go as-is.
     assert query["hardware"] == ["nonsense$$"]

@@ -184,8 +184,7 @@ def wire_conventions_resource() -> dict[str, object]:
         },
         "example": {
             "description": (
-                "Illustrative only -- a generic 'status + items' wire, not a "
-                "real project's format."
+                "Illustrative only -- a generic 'status + items' wire, not a real project's format."
             ),
             "layout": "status ~ items",
             "status": "level ^ label ^ age_min      level = G|Y|O|R",
@@ -419,8 +418,7 @@ def touch_interaction_resource() -> dict[str, object]:
             "on-screen button, you compare the event x/y against the layer's "
             "bounds yourself. A whole-screen swipe surface needs none of "
             "that -- prefer it when the UI allows.",
-            "Single-point only. Do not design around pinch, two-finger, or "
-            "simultaneous touches.",
+            "Single-point only. Do not design around pinch, two-finger, or simultaneous touches.",
         ],
         "credit": (
             "Patterns observed in '2048 Touch' by vorsk/lanrat (store id "

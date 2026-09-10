@@ -35,15 +35,15 @@ def capabilities() -> dict[str, object]:
     return get_capabilities()
 
 
-tools_store.register(mcp)    # tier 1: store_* (search/browse/compare/download)
-tools_design.register(mcp)   # tier 2: image_quantize/prep, color_nearest, palette_swatch
-tools_fonts.register(mcp)    # tier 2: font_plan, pdc_convert
-tools_flow.register(mcp)     # tier 3: flow_run/validate, emu screenshot/input/logs
+tools_store.register(mcp)  # tier 1: store_* (search/browse/compare/download)
+tools_design.register(mcp)  # tier 2: image_quantize/prep, color_nearest, palette_swatch
+tools_fonts.register(mcp)  # tier 2: font_plan, pdc_convert
+tools_flow.register(mcp)  # tier 3: flow_run/validate, emu screenshot/input/logs
 tools_devloop.register(mcp)  # tier 3: pebble_build/install, emu start/stop
 tools_project.register(mcp)  # phase 4: project_new/info/add_resource/set_meta
-tools_review.register(mcp)   # phase 4: design_review, project_smoke_test
-resources.register(mcp)      # pebble:// colors, fonts, platforms,
-                             #            wire-conventions, touch-interaction
+tools_review.register(mcp)  # phase 4: design_review, project_smoke_test
+resources.register(mcp)  # pebble:// colors, fonts, platforms,
+#            wire-conventions, touch-interaction
 
 
 def main() -> None:

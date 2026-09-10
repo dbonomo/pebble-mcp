@@ -102,11 +102,14 @@ def test_parse_comments_and_blanks_ignored():
 
 
 def test_parse_tap_and_all_step_types():
-    flow = parse_flow(
-        "app d\nwait 2\nshot s\npress up\nlongpress select 600\ntap\n"
-    )
+    flow = parse_flow("app d\nwait 2\nshot s\npress up\nlongpress select 600\ntap\n")
     assert [type(s) for s in flow.steps] == [
-        AppStep, WaitStep, ShotStep, PressStep, LongPressStep, TapStep
+        AppStep,
+        WaitStep,
+        ShotStep,
+        PressStep,
+        LongPressStep,
+        TapStep,
     ]
 
 
@@ -241,8 +244,11 @@ def test_pacing_is_baked_into_the_driver(tmp_path):
     slept: list[float] = []
     flow = parse_flow("app demo\nshot a\npress down\npress up\ntap\n", name="demo")
     run_flow(
-        flow, str(tmp_path / "g"), repo_root=str(tmp_path),
-        runner=StubRunner(), sleep=slept.append,
+        flow,
+        str(tmp_path / "g"),
+        repo_root=str(tmp_path),
+        runner=StubRunner(),
+        sleep=slept.append,
     )
     # One settle per input (2 presses + 1 tap) and one post-install settle.
     assert slept.count(BUTTON_SETTLE_SEC) == 3
@@ -347,9 +353,7 @@ def test_run_flow_second_wedge_raises(tmp_path):
     runner = StubRunner(fail={"screenshot": 99})  # always wedges
 
     with pytest.raises(Wedged):
-        run_flow(
-            flow, str(tmp_path / "g"), repo_root=str(tmp_path), runner=runner, sleep=_no_sleep
-        )
+        run_flow(flow, str(tmp_path / "g"), repo_root=str(tmp_path), runner=runner, sleep=_no_sleep)
 
 
 # --------------------------------------------------------------------------- #
@@ -358,15 +362,15 @@ def test_run_flow_second_wedge_raises(tmp_path):
 @pytest.mark.parametrize(
     "name",
     [
-        "../../../etc/pwned",   # leading traversal
-        "foo/../../../etc/x",   # internal component then traversal (escapes)
-        "sub/deep",             # any separator is refused
-        "back\\slash",          # windows-style separator
+        "../../../etc/pwned",  # leading traversal
+        "foo/../../../etc/x",  # internal component then traversal (escapes)
+        "sub/deep",  # any separator is refused
+        "back\\slash",  # windows-style separator
         ".",
         "..",
-        "with\x00null",         # null byte
-        "ctrl\x01char",         # control char
-        "",                     # empty (e.g. `shot ""` -> handled at run, but token)
+        "with\x00null",  # null byte
+        "ctrl\x01char",  # control char
+        "",  # empty (e.g. `shot ""` -> handled at run, but token)
     ],
 )
 def test_parse_rejects_unsafe_shot_names(name):

@@ -356,9 +356,7 @@ def test_search_rejects_invalid_type_string():
 def test_search_pages_until_no_next_page():
     # Two pages of "all", then most-loved empty. Page 1 has a nextPage link so
     # the scan continues to offset 50; page 2 has none so it stops.
-    page1 = _synthetic_page(
-        [_app("p1", "Weather One", "X", "d")], next_page="/n?offset=50"
-    )
+    page1 = _synthetic_page([_app("p1", "Weather One", "X", "d")], next_page="/n?offset=50")
     page2 = _synthetic_page([_app("p2", "Weather Two", "X", "d")])
     calls = {"n": 0}
 
@@ -474,9 +472,7 @@ def test_download_pbw_surfaces_http_error(tmp_path):
         }
     )
     with pytest.raises(StoreError, match="pbw download failed"):
-        tools_store._store_download_pbw(
-            client, "698fc9d8086643000aef17a3", str(tmp_path / "dl")
-        )
+        tools_store._store_download_pbw(client, "698fc9d8086643000aef17a3", str(tmp_path / "dl"))
 
 
 # --------------------------------------------------------------------------- #
@@ -543,9 +539,7 @@ def test_download_pbw_hostile_pbw_url_segment_sanitized(tmp_path):
 def test_download_pbw_rejects_dest_dir_that_is_a_file(tmp_path):
     existing_file = tmp_path / "not-a-dir"
     existing_file.write_text("i am a file")
-    client, _ = client_for(
-        {("GET", "/api/v1/apps/id/x"): (200, _hostile_app_body("x"))}
-    )
+    client, _ = client_for({("GET", "/api/v1/apps/id/x"): (200, _hostile_app_body("x"))})
     with pytest.raises(StoreError, match="not a directory"):
         tools_store._store_download_pbw(client, "x", str(existing_file))
 

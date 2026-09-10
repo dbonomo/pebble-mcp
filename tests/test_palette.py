@@ -38,7 +38,7 @@ ASSETS = Path(__file__).resolve().parents[1] / "assets" / "palettes"
 def _parse_act(path: Path) -> list[str]:
     data = path.read_bytes()
     count = struct.unpack(">H", data[768:770])[0]
-    return [f"{data[i*3]:02X}{data[i*3+1]:02X}{data[i*3+2]:02X}" for i in range(count)]
+    return [f"{data[i * 3]:02X}{data[i * 3 + 1]:02X}{data[i * 3 + 2]:02X}" for i in range(count)]
 
 
 def _parse_aseprite(path: Path) -> list[tuple[int, int, int, int]]:

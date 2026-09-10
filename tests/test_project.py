@@ -62,9 +62,7 @@ def test_new_c_defaults_to_all_seven_platforms(tmp_path):
 
 
 def test_new_custom_platforms_validated_and_ordered(tmp_path):
-    r = p.project_new(
-        "Face", language="c", platforms=["emery", "aplite"], dest_dir=str(tmp_path)
-    )
+    r = p.project_new("Face", language="c", platforms=["emery", "aplite"], dest_dir=str(tmp_path))
     # Canonical order, not input order.
     assert r["platforms"] == ["aplite", "emery"]
 
@@ -208,9 +206,7 @@ def test_add_resource_bitmap_with_prep_target(tmp_path):
     r = p.project_new("Img", language="c", dest_dir=str(tmp_path))
     src = tmp_path / "in.png"
     Image.new("RGB", (400, 400), (200, 30, 30)).save(src)
-    out = p.project_add_resource(
-        r["path"], str(src), "ICON", "bitmap", prep_target="menu-icon"
-    )
+    out = p.project_add_resource(r["path"], str(src), "ICON", "bitmap", prep_target="menu-icon")
     written = os.path.join(r["path"], "resources", "in.png")
     assert os.path.isfile(written)
     # Prepped to the menu-icon target size (25x25) and quantized.
@@ -255,12 +251,8 @@ def test_set_meta_specific_uuid(tmp_path):
 
 
 def test_set_meta_add_remove_platforms(tmp_path):
-    r = p.project_new(
-        "Meta", language="c", platforms=["aplite", "basalt"], dest_dir=str(tmp_path)
-    )
-    blk = p.project_set_meta(
-        r["path"], add_platforms=["emery"], remove_platforms=["aplite"]
-    )
+    r = p.project_new("Meta", language="c", platforms=["aplite", "basalt"], dest_dir=str(tmp_path))
+    blk = p.project_set_meta(r["path"], add_platforms=["emery"], remove_platforms=["aplite"])
     assert blk["targetPlatforms"] == ["basalt", "emery"]
 
 

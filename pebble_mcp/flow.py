@@ -281,9 +281,7 @@ def _pbw_path(value: str, lineno: int) -> str:
 
 def _need(args: list[str], n: int, cmd: str, lineno: int) -> None:
     if len(args) != n:
-        raise FlowParseError(
-            f"line {lineno}: {cmd!r} expects {n} argument(s), got {len(args)}"
-        )
+        raise FlowParseError(f"line {lineno}: {cmd!r} expects {n} argument(s), got {len(args)}")
 
 
 def _button(value: str, lineno: int) -> str:
@@ -425,9 +423,7 @@ class _Driver:
         self.sleep(2)
         out = ""
         for attempt in range(2):
-            rc, out = self._run(
-                ["pebble", "install", "--emulator", "emery", pbw_path], timeout=180
-            )
+            rc, out = self._run(["pebble", "install", "--emulator", "emery", pbw_path], timeout=180)
             if rc == 0:
                 self.sleep(POST_INSTALL_SETTLE_SEC)
                 return
@@ -445,9 +441,7 @@ class _Driver:
                     # A non-PNG (or truncated) file means the capture produced
                     # garbage — treat like a wedge so it gets one recovery pass
                     # rather than surfacing a corrupt "shot".
-                    raise Wedged(
-                        f"screenshot wrote a non-PNG file ({os.path.getsize(dest)} bytes)"
-                    )
+                    raise Wedged(f"screenshot wrote a non-PNG file ({os.path.getsize(dest)} bytes)")
                 return
             if looks_wedged(out):
                 raise Wedged("screenshot wedge: " + out[-200:])
@@ -499,9 +493,7 @@ class _Driver:
                     app = step.project_dir
                     outdir = os.path.join(self.out_dir, app)
                     if not _within(self.out_dir, outdir):
-                        raise FlowParseError(
-                            f"app {app!r} would escape the output directory"
-                        )
+                        raise FlowParseError(f"app {app!r} would escape the output directory")
                     os.makedirs(outdir, exist_ok=True)
                     self.log(f"  -- install {app}")
                     self.install_app(app)
@@ -526,9 +518,7 @@ class _Driver:
                     self.log(f"  -- shot {fname}")
                     t0 = time.monotonic()
                     self.screenshot(dest)
-                    shots.append(
-                        Shot(app, counter, step.name, fname, dest, time.monotonic() - t0)
-                    )
+                    shots.append(Shot(app, counter, step.name, fname, dest, time.monotonic() - t0))
                 elif isinstance(step, PressStep):
                     self.button(["click", step.button])
                 elif isinstance(step, LongPressStep):

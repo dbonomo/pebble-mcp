@@ -116,9 +116,7 @@ def _full_app(app: App) -> dict[str, Any]:
     }
 
 
-def _page_dict(
-    page: Any, hardware: str, *, extra: dict[str, Any] | None = None
-) -> dict[str, Any]:
+def _page_dict(page: Any, hardware: str, *, extra: dict[str, Any] | None = None) -> dict[str, Any]:
     """Shape a :class:`~pebble_mcp.store.Page` into a listing response."""
     out: dict[str, Any] = {
         "hardware": hardware,
@@ -257,9 +255,7 @@ def _search_scan(
     what the ``all``/``most-loved`` collections return, so an app outside
     those pools is invisible here — hence the by-id escape hatch in the return.
     """
-    scan_types = (
-        _SCAN_TYPES_FOR_ANY if type_string == "any" else (type_string,)
-    )
+    scan_types = _SCAN_TYPES_FOR_ANY if type_string == "any" else (type_string,)
 
     # Gather a candidate pool by paging the relevant listings. Dedupe by id;
     # first sighting wins (identical app across pools is the same object).
@@ -400,9 +396,7 @@ def _pbw_filename(app: App) -> str:
     return _sanitize_filename(f"{app.id}-{ver}.pbw")
 
 
-def _store_download_pbw(
-    client: StoreClient, app_id: str, dest_dir: str
-) -> dict[str, Any]:
+def _store_download_pbw(client: StoreClient, app_id: str, dest_dir: str) -> dict[str, Any]:
     app = client.get_app(app_id)
     url = app.pbw_url
     if not url:
@@ -434,9 +428,7 @@ def _store_download_pbw(
     # Belt-and-suspenders: even after sanitizing the filename, verify the
     # resolved target really lands inside dest_dir before writing.
     if not path.resolve().is_relative_to(dest.resolve()):
-        raise StoreError(
-            f"refusing to write pbw outside dest_dir (computed {path!s})"
-        )
+        raise StoreError(f"refusing to write pbw outside dest_dir (computed {path!s})")
     path.write_bytes(raw)
     return {
         "app_id": app.id,

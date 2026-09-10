@@ -183,13 +183,9 @@ def test_large_image_downsampled_but_stays_on_palette():
 # smoke_test — build / install / screenshot via a stub runner
 # --------------------------------------------------------------------------- #
 WAF_SUCCESS = (
-    "[20/20] Creating app_bundle:  -> build/app.pbw\n"
-    "'build' finished successfully (0.1s)\n"
+    "[20/20] Creating app_bundle:  -> build/app.pbw\n'build' finished successfully (0.1s)\n"
 )
-WAF_ERROR = (
-    "../src/c/app.c:5:3: error: 'x' undeclared (first use in this function)\n"
-    "Build failed\n"
-)
+WAF_ERROR = "../src/c/app.c:5:3: error: 'x' undeclared (first use in this function)\nBuild failed\n"
 
 
 class SmokeRunner:

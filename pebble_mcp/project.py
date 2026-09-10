@@ -52,7 +52,7 @@ SDK_VERSION = "3"
 DEFAULT_AUTHOR = "pebble-mcp"
 CLAY_VERSION = "^1.0.4"
 
-_WSCRIPT = '''\
+_WSCRIPT = """\
 #
 # This file is the default set of rules to compile a Pebble application.
 #
@@ -101,9 +101,9 @@ def build(ctx):
                                          'src/pkjs/**/*.json',
                                          'src/common/**/*.js']),
                    js_entry_file='src/pkjs/index.js')
-'''
+"""
 
-_C_WATCHFACE = '''\
+_C_WATCHFACE = """\
 #include <pebble.h>
 
 static Window *s_window;
@@ -160,9 +160,9 @@ int main(void) {
   app_event_loop();
   deinit();
 }
-'''
+"""
 
-_C_WATCHAPP = '''\
+_C_WATCHAPP = """\
 #include <pebble.h>
 
 static Window *s_window;
@@ -203,10 +203,10 @@ int main(void) {
   app_event_loop();
   deinit();
 }
-'''
+"""
 
 # Alloy native glue -- boots the Moddable XS machine that runs src/embeddedjs.
-_ALLOY_MDBL_C = '''\
+_ALLOY_MDBL_C = """\
 #include <pebble.h>
 
 int main(void) {
@@ -225,9 +225,9 @@ int main(void) {
 
   window_destroy(w);
 }
-'''
+"""
 
-_ALLOY_MAIN_WATCHFACE = '''\
+_ALLOY_MAIN_WATCHFACE = """\
 import Poco from "commodetto/Poco";
 
 let render = new Poco(screen);
@@ -246,9 +246,9 @@ function draw() {
 }
 
 watch.addEventListener('secondchange', draw);
-'''
+"""
 
-_ALLOY_MAIN_WATCHAPP = '''\
+_ALLOY_MAIN_WATCHAPP = """\
 import Poco from "commodetto/Poco";
 
 let render = new Poco(screen);
@@ -267,9 +267,9 @@ function draw() {
 }
 
 draw();
-'''
+"""
 
-_ALLOY_MANIFEST = '''\
+_ALLOY_MANIFEST = """\
 {
 	"include":  [
 		"$(MODDABLE)/examples/manifest_mod.json",
@@ -279,15 +279,15 @@ _ALLOY_MANIFEST = '''\
 		"*": "./main"
 	}
 }
-'''
+"""
 
-_PKJS_PLAIN = '''\
+_PKJS_PLAIN = """\
 Pebble.addEventListener("ready", function (e) {
   console.log("PebbleKit JS ready.");
 });
-'''
+"""
 
-_PKJS_CLAY = '''\
+_PKJS_CLAY = """\
 var Clay = require('pebble-clay');
 var clayConfig = require('./config');
 var clay = new Clay(clayConfig);
@@ -295,9 +295,9 @@ var clay = new Clay(clayConfig);
 Pebble.addEventListener("ready", function (e) {
   console.log("PebbleKit JS ready (Clay config enabled).");
 });
-'''
+"""
 
-_CLAY_CONFIG_JS = '''\
+_CLAY_CONFIG_JS = """\
 // Clay configuration page. Fields map onto the pebble.messageKeys declared in
 // package.json; edit both together. See https://github.com/pebble/clay
 module.exports = [
@@ -321,7 +321,7 @@ module.exports = [
     defaultValue: 'Save'
   }
 ];
-'''
+"""
 
 _CLAY_MESSAGE_KEYS = ["SETTING_ENABLED"]
 
@@ -356,9 +356,7 @@ def _write(path: str, content: str) -> None:
 def _load_pkg(directory: str) -> dict[str, Any]:
     pkg_path = os.path.join(directory, "package.json")
     if not os.path.isfile(pkg_path):
-        raise ValueError(
-            f"{directory!r} is not a Pebble project: no package.json found"
-        )
+        raise ValueError(f"{directory!r} is not a Pebble project: no package.json found")
     try:
         with open(pkg_path, encoding="utf-8") as fh:
             data = json.load(fh)
@@ -393,9 +391,7 @@ def project_new(
     if kind not in KINDS:
         raise ValueError(f"unknown kind {kind!r}; expected one of {list(KINDS)}")
     if language not in LANGUAGES:
-        raise ValueError(
-            f"unknown language {language!r}; expected one of {list(LANGUAGES)}"
-        )
+        raise ValueError(f"unknown language {language!r}; expected one of {list(LANGUAGES)}")
 
     slug = _slug(name)
     is_watchface = kind == "watchface"
@@ -417,9 +413,7 @@ def project_new(
             if not plats:
                 plats = list(ALLOY_PLATFORMS)
     else:
-        plats = (
-            list(DEFAULT_C_PLATFORMS) if platforms is None else _validate_platforms(platforms)
-        )
+        plats = list(DEFAULT_C_PLATFORMS) if platforms is None else _validate_platforms(platforms)
 
     project_dir = os.path.abspath(os.path.join(dest_dir, slug))
     if os.path.exists(project_dir):
@@ -566,9 +560,7 @@ def project_add_resource(
             f"unknown resource_type {resource_type!r}; expected one of "
             f"{sorted(set(_RESOURCE_TYPES))}"
         )
-    media_type = {"bitmap": "bitmap", "font": "font", "raw": "raw"}[
-        _RESOURCE_TYPES[resource_type]
-    ]
+    media_type = {"bitmap": "bitmap", "font": "font", "raw": "raw"}[_RESOURCE_TYPES[resource_type]]
 
     data = _load_pkg(directory)
     resources_dir = os.path.join(directory, "resources")

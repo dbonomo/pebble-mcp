@@ -62,9 +62,7 @@ async def test_registers_expected_tools(mcp):
 # --------------------------------------------------------------------------- #
 async def test_image_quantize_returns_stats_and_image(mcp):
     content = _content(
-        await mcp.call_tool(
-            "image_quantize", {"source": _data_uri(_gradient()), "dither": "none"}
-        )
+        await mcp.call_tool("image_quantize", {"source": _data_uri(_gradient()), "dither": "none"})
     )
     kinds = [type(c) for c in content]
     assert TextContent in kinds and ImageContent in kinds
@@ -81,9 +79,7 @@ async def test_image_quantize_returns_stats_and_image(mcp):
 
 async def test_image_quantize_corrected_flag(mcp):
     content = _content(
-        await mcp.call_tool(
-            "image_quantize", {"source": _data_uri(_gradient()), "corrected": True}
-        )
+        await mcp.call_tool("image_quantize", {"source": _data_uri(_gradient()), "corrected": True})
     )
     stats = json.loads(next(c for c in content if isinstance(c, TextContent)).text)
     assert stats["corrected"] is True
@@ -148,9 +144,7 @@ async def test_color_nearest_rgb_triple(mcp):
 
 async def test_color_nearest_with_background_contrast(mcp):
     content = _content(
-        await mcp.call_tool(
-            "color_nearest", {"color": "#FFFFFF", "background": "#000000"}
-        )
+        await mcp.call_tool("color_nearest", {"color": "#FFFFFF", "background": "#000000"})
     )
     payload = json.loads(content[0].text)
     assert payload["contrast_ratio"] == 21.0
@@ -163,9 +157,7 @@ async def test_color_nearest_with_background_contrast(mcp):
 # --------------------------------------------------------------------------- #
 async def test_palette_swatch_returns_image(mcp):
     content = _content(
-        await mcp.call_tool(
-            "palette_swatch", {"colors": ["#FF0000", "00FF00", "0,0,255"]}
-        )
+        await mcp.call_tool("palette_swatch", {"colors": ["#FF0000", "00FF00", "0,0,255"]})
     )
     assert len(content) == 1
     block = content[0]

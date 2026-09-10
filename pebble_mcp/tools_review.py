@@ -124,9 +124,7 @@ def smoke_test_impl(
 ) -> list[Any]:
     """Implementation behind ``project_smoke_test`` (see ``register`` for docs)."""
     try:
-        result = review.smoke_test(
-            _resolve(project_dir), platform, runner=runner, sleep=sleep
-        )
+        result = review.smoke_test(_resolve(project_dir), platform, runner=runner, sleep=sleep)
     except devloop.PebbleUnavailableError as e:
         raise ToolError(str(e)) from e
     status = result.to_dict()

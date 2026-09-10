@@ -78,8 +78,14 @@ async def test_fonts_resource_shape():
     assert len(data["fonts"]) > 0
     for f in data["fonts"]:
         assert set(f.keys()) == {
-            "key", "c_key", "family", "points", "weight",
-            "numbers_only", "emery_only", "note",
+            "key",
+            "c_key",
+            "family",
+            "points",
+            "weight",
+            "numbers_only",
+            "emery_only",
+            "note",
         }
     keys = {f["key"] for f in data["fonts"]}
     assert "LECO_42_NUMBERS" in keys

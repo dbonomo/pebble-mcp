@@ -350,9 +350,7 @@ def parse_app(data: dict[str, Any]) -> App:
         )
     compat = _as_dict(data.get("compatibility"))
     compatible = [
-        name
-        for name, spec in compat.items()
-        if isinstance(spec, dict) and spec.get("supported")
+        name for name, spec in compat.items() if isinstance(spec, dict) and spec.get("supported")
     ]
     platforms_raw = data.get("hardware_platforms")
     platforms = [
@@ -595,9 +593,7 @@ class StoreClient:
         try:
             return json.loads(raw.decode("utf-8")) if raw else {}
         except (json.JSONDecodeError, UnicodeDecodeError) as e:
-            raise StoreResponseError(
-                f"{method} {path}: response was not valid JSON ({e})"
-            ) from e
+            raise StoreResponseError(f"{method} {path}: response was not valid JSON ({e})") from e
 
     @staticmethod
     def _error_message(raw: bytes) -> str | None:
@@ -673,11 +669,15 @@ class StoreClient:
         }
         if tag is not None:
             request["tagFilters"] = [[tag]]
-        url = self.search_url + "?" + urllib.parse.urlencode(
-            {
-                "x-algolia-api-key": SEARCH_API_KEY,
-                "x-algolia-application-id": SEARCH_APP_ID,
-            }
+        url = (
+            self.search_url
+            + "?"
+            + urllib.parse.urlencode(
+                {
+                    "x-algolia-api-key": SEARCH_API_KEY,
+                    "x-algolia-application-id": SEARCH_APP_ID,
+                }
+            )
         )
         data = self._request(
             "POST",

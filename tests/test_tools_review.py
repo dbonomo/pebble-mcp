@@ -164,9 +164,7 @@ def test_design_review_off_palette_input_flags_it():
 # --------------------------------------------------------------------------- #
 def test_smoke_test_build_ok_returns_status_and_image(with_pebble, tmp_path):
     proj = _project(tmp_path)
-    content = tools_review.smoke_test_impl(
-        str(proj), runner=SmokeRunner(), sleep=_no_sleep
-    )
+    content = tools_review.smoke_test_impl(str(proj), runner=SmokeRunner(), sleep=_no_sleep)
     status = content[0]
     assert status["built"] is True
     assert status["installed"] is True

@@ -138,9 +138,7 @@ def test_flow_run_defaults_out_dir_to_tempdir(with_pebble):
 # --------------------------------------------------------------------------- #
 def test_flow_run_parse_error_surfaces_line_number(with_pebble):
     with pytest.raises(ToolError) as exc:
-        tools_flow.run_flow_tool(
-            "app demo\nfrobnicate x\n", runner=StubRunner(), sleep=_no_sleep
-        )
+        tools_flow.run_flow_tool("app demo\nfrobnicate x\n", runner=StubRunner(), sleep=_no_sleep)
     assert "line 2" in str(exc.value)
     assert "unknown command" in str(exc.value)
 
@@ -148,9 +146,7 @@ def test_flow_run_parse_error_surfaces_line_number(with_pebble):
 def test_flow_run_refuses_over_shot_cap(with_pebble):
     lines = ["app demo"] + [f"shot s{i}" for i in range(tools_flow.MAX_SHOTS + 1)]
     with pytest.raises(ToolError) as exc:
-        tools_flow.run_flow_tool(
-            "\n".join(lines), runner=StubRunner(), sleep=_no_sleep
-        )
+        tools_flow.run_flow_tool("\n".join(lines), runner=StubRunner(), sleep=_no_sleep)
     assert str(tools_flow.MAX_SHOTS) in str(exc.value)
     assert "cap" in str(exc.value)
 
@@ -175,9 +171,7 @@ def test_flow_run_gated_without_pebble(monkeypatch):
 def test_flow_validate_returns_summary_without_pebble(monkeypatch):
     # Explicitly no pebble on PATH: flow_validate must still work (cheap check).
     monkeypatch.setattr(devloop.shutil, "which", lambda _name: None)
-    summary = tools_flow.validate_flow_tool(
-        "app demo\nwait 1\nshot a\npress down\nshot b\n"
-    )
+    summary = tools_flow.validate_flow_tool("app demo\nwait 1\nshot a\npress down\nshot b\n")
     assert summary["valid"] is True
     assert summary["shot_count"] == 2
     assert summary["step_count"] == 5
@@ -275,9 +269,7 @@ def test_emu_input_longpress_rejects_absurd_duration(with_pebble):
 
 def test_emu_input_longpress_at_cap_is_allowed(with_pebble):
     runner = StubRunner()
-    res = tools_flow.input_tool(
-        "longpress", "select", tools_flow.MAX_DURATION_MS, runner=runner
-    )
+    res = tools_flow.input_tool("longpress", "select", tools_flow.MAX_DURATION_MS, runner=runner)
     assert res["ok"] is True
 
 

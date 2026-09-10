@@ -309,9 +309,7 @@ def _install_pbw(
     _kill_wipe(runner, sleep)
     rc, out = -1, ""
     for attempt in range(2):
-        rc, out = runner(
-            ["pebble", "install", "--emulator", platform, pbw_path], None, timeout
-        )
+        rc, out = runner(["pebble", "install", "--emulator", platform, pbw_path], None, timeout)
         if rc == 0:
             return rc, out
         if looks_wedged(out) or attempt == 1:

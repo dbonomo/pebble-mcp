@@ -474,9 +474,7 @@ def _diag_dict(d: Any) -> dict[str, Any]:
     return {"severity": d.severity, "message": d.message, "file": d.file, "line": d.line}
 
 
-def _capture_launch_shot(
-    platform: str, runner: PebbleRunner, dest: str
-) -> tuple[str | None, str]:
+def _capture_launch_shot(platform: str, runner: PebbleRunner, dest: str) -> tuple[str | None, str]:
     """One ``pebble screenshot`` of the running emulator. Returns (path|None, note)."""
     rc, out = runner(["pebble", "screenshot", "--no-open", dest], None, 90)
     if rc == 0 and os.path.exists(dest) and os.path.getsize(dest) > 0 and _is_png(dest):
@@ -528,9 +526,7 @@ def smoke_test(
         )
 
     warnings = [_diag_dict(d) for d in build_res.warnings]
-    install_res = devloop.install(
-        build_res.pbw_path, platform, runner=runner, sleep=sleep
-    )
+    install_res = devloop.install(build_res.pbw_path, platform, runner=runner, sleep=sleep)
     if not install_res.success:
         return SmokeResult(
             built=True,

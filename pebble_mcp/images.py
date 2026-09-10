@@ -233,9 +233,7 @@ def _decode_b64_image(payload: str) -> Image.Image:
     try:
         raw = base64.b64decode(cleaned, validate=True)
     except (binascii.Error, ValueError) as exc:
-        raise ValueError(
-            "image source is not a readable file path or valid base64 data"
-        ) from exc
+        raise ValueError("image source is not a readable file path or valid base64 data") from exc
     return _open_verified(io.BytesIO(raw), "base64 payload")
 
 
@@ -401,9 +399,7 @@ def _distance_stats(orig_rgb: Image.Image, quant_rgb: Image.Image) -> tuple[floa
     a = orig_rgb.tobytes()
     b = quant_rgb.tobytes()
     for i in range(0, len(a), 3):
-        d = (
-            (a[i] - b[i]) ** 2 + (a[i + 1] - b[i + 1]) ** 2 + (a[i + 2] - b[i + 2]) ** 2
-        ) ** 0.5
+        d = ((a[i] - b[i]) ** 2 + (a[i + 1] - b[i + 1]) ** 2 + (a[i + 2] - b[i + 2]) ** 2) ** 0.5
         total += d
         if d > worst:
             worst = d
@@ -414,9 +410,7 @@ def _distance_stats(orig_rgb: Image.Image, quant_rgb: Image.Image) -> tuple[floa
 def _to_corrected(quant_rgb: Image.Image) -> Image.Image:
     raw = quant_rgb.tobytes()
     out = Image.new("RGB", quant_rgb.size)
-    out.putdata(
-        [_CORRECTED_RGB[(raw[i], raw[i + 1], raw[i + 2])] for i in range(0, len(raw), 3)]
-    )
+    out.putdata([_CORRECTED_RGB[(raw[i], raw[i + 1], raw[i + 2])] for i in range(0, len(raw), 3)])
     return out
 
 
@@ -428,9 +422,7 @@ def target_size(target: str) -> tuple[int, int]:
     try:
         return TARGETS[target]
     except KeyError:
-        raise ValueError(
-            f"unknown target {target!r}; expected one of {sorted(TARGETS)}"
-        ) from None
+        raise ValueError(f"unknown target {target!r}; expected one of {sorted(TARGETS)}") from None
 
 
 def resize_to_target(

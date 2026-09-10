@@ -39,6 +39,7 @@ def _pebble_on_path(monkeypatch):
         devloop.shutil, "which", lambda name: "/usr/bin/pebble" if name == "pebble" else None
     )
 
+
 # --------------------------------------------------------------------------- #
 # Realistic waf output fixtures (trimmed from real `pebble build` runs)
 # --------------------------------------------------------------------------- #
@@ -118,10 +119,7 @@ def test_parse_clean_output_has_no_diagnostics():
 def test_parse_strips_ansi_colour_codes():
     # gcc/waf colourised output wraps the tokens in CSI escapes; without
     # stripping, the diagnostic regexes match nothing at all.
-    colored = (
-        "\x1b[01m\x1b[K../src/app.c:5:3:\x1b[m\x1b[K "
-        "\x1b[01;31m\x1b[Kerror:\x1b[m\x1b[K boom"
-    )
+    colored = "\x1b[01m\x1b[K../src/app.c:5:3:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror:\x1b[m\x1b[K boom"
     diags = parse_build_output(colored)
     assert len(diags) == 1
     assert diags[0].severity == "error"
