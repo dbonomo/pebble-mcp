@@ -74,7 +74,11 @@ not just a shell.
   live-POST safety-comment convention we established.
 
 ### Tier 4 — Authenticated (env-config tokens; OFF by default)
-- `store_heart(id, on)` / `store_me()` — bearer token.
+
+> `store_heart`/`store_me` **dropped 2026-09-10 — serve none of the four verbs**
+> (find/copy-down, create, iterate, publish). Never implemented. The authed tier
+> is `pebble_publish` plus the timeline pin tools, and nothing else.
+
 - `pebble_publish(project_dir, changelog?)` — wraps the new CLI publish with
   its auto-screenshot generation. Requires explicit config opt-in AND a
   per-call confirmation phrase — an agent must never accidentally ship.

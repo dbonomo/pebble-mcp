@@ -73,8 +73,8 @@ so an agent only ever sees the tools it can actually run.
   jewel `flow_run` — run a gallery-style flow spec and get every screenshot
   back as MCP images. These tools register only when `pebble` is found.
 - **Tier 4 — Authenticated** (requires `PEBBLE_API_TOKEN`; off by default):
-  reserved for token-gated, network-mutating operations (heart an app,
-  publish, timeline pins). Detected by `capabilities()`; opt-in only.
+  reserved for token-gated, network-mutating operations — `pebble_publish` and
+  timeline pins, and nothing else. Detected by `capabilities()`; opt-in only.
 
 Read-only reference is also exposed as MCP resources: `pebble://colors`,
 `pebble://fonts`, `pebble://platforms`, `pebble://wire-conventions`,

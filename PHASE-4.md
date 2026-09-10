@@ -54,6 +54,10 @@ src templates.
 
 ## Pillar 3 — Publish (Workstream U, Tier 4 auth — after launch, needs a token)
 
+The authed tier is exactly `pebble_publish` plus the timeline pin tools.
+(`store_heart`/`store_me` were **dropped 2026-09-10 — serve none of the four
+verbs** find/copy-down, create, iterate, publish; they were never implemented.)
+
 - **`store_generate_assets(project|screenshots)`** — required appstore banner
   (720×320) + per-platform screenshots at correct sizes.
 - **`pebble_publish(dir, changelog)`** — auth-gated, confirmation handshake.

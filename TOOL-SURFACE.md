@@ -69,10 +69,12 @@ call, and when it can't, does the error tell it what to do next?**
 
 ## 6. Safety and tiers
 
-- Tier 4 (authed) tools: mutating calls (`store_heart`, `pebble_publish`,
-  timeline pushes) require an explicit `confirm: true` argument and describe
-  exactly what will happen when called without it. Publish is a two-step
-  handshake, never one call.
+- Tier 4 (authed) tools: mutating calls (`pebble_publish` and the timeline pin
+  pushes — the only two authed surfaces) require an explicit `confirm: true`
+  argument and describe exactly what will happen when called without it.
+  Publish is a two-step handshake, never one call.
+  (`store_heart`/`store_me` dropped 2026-09-10 — serve none of the four verbs
+  find/copy-down, create, iterate, publish; never implemented.)
 - `capabilities()` stays cheap, evaluated per-call, and is the single source
   of truth the other tools' gate errors point at.
 - Nothing phones home; the only network calls are the ones the tool name

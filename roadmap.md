@@ -61,7 +61,7 @@ Peak fleet: ~5 agents at once. Fable reviews each stream's PR-sized chunks.
 
 | # | Task | Agent |
 |---|---|---|
-| 3.1 | Config system (env/TOML): tokens, opt-in flags; `store_heart`, `store_me` | Sonnet |
+| 3.1 | Config system (env/TOML): tokens, opt-in flags | Sonnet |
 | 3.2 | `pebble_publish` with the confirmation handshake; `timeline_push_pin`/`delete` (sandbox first) | Opus |
 | 3.3 | Packaging: `uvx pebble-mcp` path, PyPI release, versioning | Sonnet |
 | 3.4 | README with demo GIF (flow_run capturing a face), quickstart for each MCP host, the reusable GitHub Action documented | Opus |
@@ -69,6 +69,10 @@ Peak fleet: ~5 agents at once. Fable reviews each stream's PR-sized chunks.
 
 Publish/timeline tools touch Dan's real accounts — Fable reviews 3.2 line by
 line; nothing in Phase 3 ships without Dan's explicit go.
+
+> **store_heart/store_me dropped 2026-09-10 — serve none of the four verbs**
+> (find/copy-down, create, iterate, publish). They were never implemented; the
+> Tier-4 auth surface is `pebble_publish` and the timeline pin tools only.
 
 ## Standing rules
 
