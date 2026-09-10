@@ -113,7 +113,7 @@ does the `server.py` wiring after merge.
 
 ## Repo model (decided 2026-08)
 
-Develop in the monorepo copy (`pebble-coach/pebble-mcp`) where the worktree
+Develop in `pebble/pebble-mcp` (the single copy since 2026-09-10) where the worktree
 fleet + tooling live; the standalone public repo (`~/Development/pebble-mcp`,
 github.com/dbonomo/pebble-mcp) is the **release mirror** — sync changed files
 to it and push at each checkpoint. New releases go out from there via the
